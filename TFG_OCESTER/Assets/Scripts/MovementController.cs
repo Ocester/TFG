@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class MovementController : MonoBehaviour
@@ -31,14 +32,16 @@ public class MovementController : MonoBehaviour
         playerAnim.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
         playerAnim.SetFloat("movSpeed", inputVector.magnitude);
         
-        if (Input.GetMouseButtonDown(0))
+        // verificamos si hacemos clic con el ratón y no estamos clicando en una UI
+        if (Input.GetMouseButtonDown(0)&& !EventSystem.current.IsPointerOverGameObject())
         {
-            //executeAction.Dig();
-            executeAction.Cut();
+            executeAction.Action();
         }
+        
     }
     void FixedUpdate()
     {
+        // Se contrlasn la físicas ya que Player Rb es afectado por estas y deben de controlrse en FixUpdate
         
         if (isMoving)
         {

@@ -35,9 +35,6 @@ public class pruebaControlador : MonoBehaviour
     }
     void FixedUpdate()
     {
-        // controlaremos las físicas
-        // playerRb affects physics so any ops on it should happen in FixedUpdate
-        // See why here: https://learn.unity.com/tutorial/update-and-fixedupdate#
         if (isMoving)
         {
             playerRb.MovePosition(playerRb.position + (inputVector * MovementSpeed * Time.fixedDeltaTime));

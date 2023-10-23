@@ -1,19 +1,41 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class ActionController : MonoBehaviour
 {
     private MovementController movement;
     public Animator playerAnim;
+    public Transform playerTr;
+    public CutSelection cutSelected;
+    public DigSelection digSelected;
+    public GrabSelection grabSelected;
+    
     private Vector2 dist;
     private Vector2 playerPosition;
+    private string currentTool = "grab";
+    
 
     void Start()
     {
         movement = gameObject.GetComponent<MovementController>();
+        cutSelected.OnCutSelectedTool += SelectTool;
+        digSelected.OnDigSelectedTool += SelectTool;
+        grabSelected.OnGrabSelectedTool += SelectTool;
     }
+
+    public void Action()
+    {
+        if (currentTool == "dig") Dig();
+        else if (currentTool == "cut") Cut();
+        else if (currentTool == "grab") Grab();
+        
+    }
+    public void SelectTool (string arg)
+    {
+        currentTool = arg;
+    }
+
+
     public void Dig()
     {
         movement.ToggleMovement();
@@ -21,8 +43,10 @@ public class ActionController : MonoBehaviour
         // Se calcula la diferencia de posición (dist) entre el clic y el Player. Se compara la magnitud de dist.x y dist.y para saber si el clic
         // está a la derecha, izquierda, arriba o abajo del Player.
         Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        playerPosition = new Vector2(transform.position.x, transform.position.y);
+        playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
         dist = clickPosition - playerPosition;
+        
+        Debug.DrawLine(clickPosition,playerPosition,Color.red,5.0f);
         
         if (Mathf.Abs(dist.x) > Mathf.Abs(dist.y))
         {
@@ -48,8 +72,10 @@ public class ActionController : MonoBehaviour
         // Se calcula la diferencia de posición (dist) entre el clic y el Player. Se compara la magnitud de dist.x y dist.y para saber si el clic
         // está a la derecha, izquierda, arriba o abajo del Player.
         Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        playerPosition = new Vector2(transform.position.x, transform.position.y);
+        playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
         dist = clickPosition - playerPosition;
+        
+        Debug.DrawLine(clickPosition,playerPosition,Color.red,5.0f);
         
         if (Mathf.Abs(dist.x) > Mathf.Abs(dist.y))
         {
@@ -67,7 +93,15 @@ public class ActionController : MonoBehaviour
         }
         
     }
-    
-    
-    
+
+    public void Grab()
+    {
+        Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
+        dist = clickPosition - playerPosition;
+        Debug.DrawLine(clickPosition,playerPosition,Color.red,5.0f);
+        
+        Debug.Log("Grab");
+    }
+
 }
