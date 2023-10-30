@@ -32,7 +32,7 @@ public class MovementController : MonoBehaviour
         playerAnim.SetFloat("movSpeed", inputVector.magnitude);
         
         // verificamos si hacemos clic con el ratón y no estamos clicando en una UI
-        if (Input.GetMouseButtonDown(0)&& !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             executeAction.Action();
         }

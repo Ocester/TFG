@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "CollectableVegetablesSO", menuName = "Scriptable Object/Collectable Item", order = 1)]
+[CreateAssetMenu(fileName = "CollectableVegetablesSO", menuName = "Scriptable Object/ TEST Collectable Vegetables", order = 1)]
 public class CollectableVegetablesSO : ScriptableObject
 {
         public string carrot = "carrot";

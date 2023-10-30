@@ -4,11 +4,9 @@ using UnityEngine.UI;
 
 public class DigItem : MonoBehaviour
 {
-    
-    //public event Action<string> OnDigItem;
-    [SerializeField] private ToolsSO tools;
-    [SerializeField] private VegetableSO vegetable;
+    [SerializeField] private ItemCollectableSO item;
     private ActionController selectedAction;
+    private Sprite currentCursor;
     
     // Start is called before the first frame update
     void Start()
@@ -17,29 +15,52 @@ public class DigItem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void OnMouseOver()
     {
-        
+        if (selectedAction.getTool().action != item.collectTool.action)
+        {
+            Cursor.SetCursor(selectedAction.getTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (selectedAction.getTool().action != item.collectTool.action)
+        {
+            Cursor.SetCursor(selectedAction.getTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (selectedAction.getTool() != tools.dig) return;
-        
+        if (selectedAction.getTool().action != item.collectTool.action)
+        {
+            selectedAction.SetAction(false);
+            return;
+        }
+        selectedAction.SetAction(true);
         if (other.gameObject.name == "UpHit" || other.gameObject.name == "DownHit" || other.gameObject.name == "RightHit" || other.gameObject.name == "LeftHit")
         {
             Debug.Log("DIG HIT!!!!");
-            Invoke("Activate", vegetable.respawnTime);
+            Invoke("Activate", item.respawnTime);
             gameObject.SetActive(false);
+            
+            // hay que programar la inclusión en la UI del vegetal
+            
         };
+    }
+    
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (selectedAction.getTool().action != item.collectTool.action) {
+            return;
+        }
+        selectedAction.SetAction(true);
     }
 
     private void Activate()
     {
         gameObject.SetActive(true);
-        
     }
-
-
 
 }

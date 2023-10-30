@@ -1,5 +1,6 @@
 
 using System;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,56 +8,74 @@ public class ActionController : MonoBehaviour
 {
     public Animator playerAnim;
     public Transform playerTr;
-    public CutSelection cutSelected;
-    public DigSelection digSelected;
-    public GrabSelection grabSelected;
-    public PointerSelection pointerSelected;
     
-    [SerializeField] private ToolsSO tools;
+    [SerializeField] private ToolsSO grab;
+    [SerializeField] private ToolsSO pointer;
+    [SerializeField] private ToolsSO dig;
+    [SerializeField] private ToolsSO cut;
+    
     private MovementController movement;
     private Vector2 dist;
     private Vector2 playerPosition;
-    private string currentTool;
+    private ToolsSO currentTool;
+    private bool action = true;
 
+    private void OnEnable()
+    {
+        // Se suscribe al evento OnSelectedTool
+        EventManager.OnSelectedTool += SelectTool;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnSelectedTool -= SelectTool;
+    }
    void Start()
     {
         movement = gameObject.GetComponent<MovementController>();
-        cutSelected.OnCutSelectedTool += SelectTool;
-        digSelected.OnDigSelectedTool += SelectTool;
-        grabSelected.OnGrabSelectedTool += SelectTool;
-        pointerSelected.OnPointerSelectedTool += SelectTool;
-        currentTool = tools.pointer;
+        currentTool = pointer;
     }
 
-   public string getTool()
+   public ToolsSO getTool()
    {
        return currentTool;
    }
-
-   public void Action()
+   
+    public void SelectTool (ToolsSO toolSelected)
     {
-        if (currentTool == tools.dig) Dig();
-        else if (currentTool == tools.cut) Cut();
-        else if (currentTool == tools.grab) Grab();
-        else if (currentTool == tools.pointer) Point();
+        currentTool = toolSelected;
     }
-    public void SelectTool (string arg)
+
+    // Esta función se encarga de activar o desactivar la posibilidad de realizar la acción, dependiendo de 
+    // si el objto al que se intenta golpear se realiza con la herramienta correcta o no (se controla desde script (DigItem, GrabItem, ...)
+    public void SetAction(bool setAction)
     {
-        currentTool = arg;
+        action = setAction;
+    }
+
+
+    public void Action()
+    {
+        Debug.Log("Action = " + action);
+        if (currentTool.action == dig.action && action) Dig();
+        else if (currentTool.action == cut.action && action) Cut();
+        else if (currentTool.action == grab.action && action) Grab();
+        else if (currentTool.action == pointer.action && action) Point();
     }
 
     public void Point()
     {
+        action = false;// una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
         Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
         dist = clickPosition - playerPosition;
         Debug.DrawLine(clickPosition,playerPosition,Color.red,5.0f);
-        
         Debug.Log("Point action!");
     }
 
     public void Dig()
     {
+        action = false;// una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
         movement.ToggleMovement();
         
         // Se calcula la diferencia de posición (dist) entre el clic y el Player. Se compara la magnitud de dist.x y dist.y para saber si el clic
@@ -86,6 +105,7 @@ public class ActionController : MonoBehaviour
     
     public void Cut()
     {
+        action = false; // una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
         movement.ToggleMovement();
         
         // Se calcula la diferencia de posición (dist) entre el clic y el Player. Se compara la magnitud de dist.x y dist.y para saber si el clic
@@ -115,6 +135,7 @@ public class ActionController : MonoBehaviour
 
     public void Grab()
     {
+        action = false; // una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
         Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
         dist = clickPosition - playerPosition;

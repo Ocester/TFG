@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GrabItem : MonoBehaviour
 {
-    //public event Action<string> OnDigItem;
-    [SerializeField] private ToolsSO tools;
-    [SerializeField] private EggSO egg;
+    
+    [SerializeField] private ItemCollectableSO item;
     private ActionController selectedAction;
+    private bool insideArea = false;
     
     // Start is called before the first frame update
     void Start()
@@ -15,24 +17,60 @@ public class GrabItem : MonoBehaviour
         selectedAction = GameObject.FindObjectOfType<ActionController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseOver()
     {
-        
+        if (selectedAction.getTool().action != item.collectTool.action)
+        {
+            Cursor.SetCursor(selectedAction.getTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (selectedAction.getTool().action != item.collectTool.action)
+        {
+            Cursor.SetCursor(selectedAction.getTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (selectedAction.getTool() != tools.grab) return;
-        
-        if (other.gameObject.CompareTag("Player"))
+        if (selectedAction.getTool().action != item.collectTool.action)
         {
-            Debug.Log("GRAB HIT!!!!");
-            gameObject.SetActive(false);
-            Invoke("Activate", egg.respawnTime);
+            selectedAction.SetAction(false);
+            return;
+        }
+        selectedAction.SetAction(true);
+        if (other.gameObject.CompareTag("grabArea"))
+        {
+            insideArea = true;
+            Debug.Log(" Area para hacer clic!!!!");
         };
     }
+    
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (selectedAction.getTool().action != item.collectTool.action) {
+            return;
+        }
+        selectedAction.SetAction(true);
+    }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        //fuera de zona
+        insideArea = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0)&& insideArea)
+        {
+            // ******* hay que Ver que esté apuntando a un objeto, no solo con click ******** //
+            gameObject.SetActive(false);
+            Invoke("Activate", item.respawnTime);
+        }
+    }
     private void Activate()
     {
         gameObject.SetActive(true);
