@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.EventSystems;
 
 public class GrabItem : MonoBehaviour
@@ -9,12 +11,60 @@ public class GrabItem : MonoBehaviour
     
     [SerializeField] private ItemCollectableSO item;
     private ActionController selectedAction;
-    private bool insideArea = false;
+    private QuestController questController;
+    [SerializeField] private bool insideArea = false;
+    [SerializeField] private bool canBeGrabbed = false;
+    [SerializeField] private float maxDistance = 0.8f;
+    private Ray ray;
+    private RaycastHit2D hit;
+    private GameObject player;
+    private Vector2 playerPosition;
     
     // Start is called before the first frame update
     void Start()
     {
+        //EventController.completeQuest += CheckNextQuest; // comprobará si el elemento es un item de la quest en curso y lo activa
+        EventController.activateItem += CheckNextQuest;
         selectedAction = GameObject.FindObjectOfType<ActionController>();
+        questController = GameObject.FindObjectOfType<QuestController>();
+        player = GameObject.FindWithTag("Player");
+    }
+    
+    private void Update()
+    {
+        /*if (Input.GetMouseButtonDown(0) && insideArea && canBeGrabbed)
+        {
+            questController.GetItem(item);
+            Destroy(gameObject);
+        }*/
+    }
+
+    public ItemCollectableSO GetItem()
+    {
+        return item;
+    }
+
+    // Revisa si el objeto es un item de la quest acutal, si es así será activado para ser recogido, sino no
+    private void IsCurrentQuestItem(QuestSO checkQuest)
+    {
+        if (!questController.GetCurrentQuest() && item)
+        {
+            return;
+        }
+        //Debug.Log("Entro IsCurrentQuestItem: "+ questController.GetCurrentQuest().recipe.recipeName);
+        canBeGrabbed = false;
+        foreach (var element in checkQuest.recipe.elements)
+        {
+            if (item.nameItem == element.requiredItem.nameItem)
+            {
+                canBeGrabbed = true;
+            }
+        }
+    }
+
+    private void CheckNextQuest(QuestSO checkQuest)
+    {
+        IsCurrentQuestItem(checkQuest);
     }
 
     private void OnMouseOver()
@@ -22,7 +72,39 @@ public class GrabItem : MonoBehaviour
         if (selectedAction.getTool().action != item.collectTool.action)
         {
             Cursor.SetCursor(selectedAction.getTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
+            return;
         }
+
+        if (!canBeGrabbed)
+        {
+            Cursor.SetCursor(selectedAction.getTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
+            return;
+        }
+        
+        playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
+        Vector2 rayOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        hit = Physics2D.Raycast(rayOrigin, Vector2.zero);
+        float dist = Vector2.Distance(playerPosition, hit.point);
+
+        if (hit.collider != null)
+        {
+            if (dist <= maxDistance)
+            {
+                // El raycast está dentro del rango máximo
+                insideArea = true;
+            }
+            else
+            {
+                // El raycast está fuera del rango máximo
+                insideArea = false;
+            }
+        }
+        if (insideArea)
+        {
+            Debug.Log("InsideArea && IsGrabable true: ");
+            selectedAction.SetAction(true);
+        }
+        
     }
 
     private void OnMouseExit()
@@ -31,49 +113,11 @@ public class GrabItem : MonoBehaviour
         {
             Cursor.SetCursor(selectedAction.getTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (selectedAction.getTool().action != item.collectTool.action)
+        if (!canBeGrabbed)
         {
-            selectedAction.SetAction(false);
-            return;
+            Cursor.SetCursor(selectedAction.getTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
         }
-        selectedAction.SetAction(true);
-        if (other.gameObject.CompareTag("grabArea"))
-        {
-            insideArea = true;
-            Debug.Log(" Area para hacer clic!!!!");
-        };
-    }
-    
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (selectedAction.getTool().action != item.collectTool.action) {
-            return;
-        }
-        selectedAction.SetAction(true);
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        //fuera de zona
         insideArea = false;
     }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0)&& insideArea)
-        {
-            // ******* hay que Ver que esté apuntando a un objeto, no solo con click ******** //
-            gameObject.SetActive(false);
-            Invoke("Activate", item.respawnTime);
-        }
-    }
-    private void Activate()
-    {
-        gameObject.SetActive(true);
-        
-    }
+  
 }

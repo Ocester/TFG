@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08846b5d81a33405da6801f75118a552, type: 3}
   m_Name: CutTool
   m_EditorClassIdentifier: 
-  action: cut
-  imgAction: {fileID: 21300000, guid: 1096d5d21d8b84391a2f92e08194a83d, type: 3}
-  imgActionDisabled: {fileID: 21300000, guid: a414bbebeefcd4df487b130edf6e69b8, type: 3}
+  action: 0
+  imgAction: {fileID: 21300000, guid: fa6eb913e20ff4d2a8398a40b06385ee, type: 3}
+  imgActionDisabled: {fileID: 21300000, guid: 803ad2a2628934499938d338a2483cd0, type: 3}

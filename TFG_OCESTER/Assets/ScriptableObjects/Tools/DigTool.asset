@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DigTool
   m_EditorClassIdentifier: 
   action: 1
-  imgAction: {fileID: 21300000, guid: 71697d9a6840a428bac2fda32fc02150, type: 3}
-  imgActionDisabled: {fileID: 21300000, guid: cf6f4a0293fff4f758ac2aaaf3004838, type: 3}
+  imgAction: {fileID: 21300000, guid: c466724308700412490a1e630c436de9, type: 3}
+  imgActionDisabled: {fileID: 21300000, guid: 9a93afe7eb3ac49c581f1e752a2f8fd7, type: 3}

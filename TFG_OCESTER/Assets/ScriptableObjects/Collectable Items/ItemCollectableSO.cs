@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemCollectableSO", menuName = "Scriptable Object/Item Collectable", order = 1)]
 public class ItemCollectableSO : ScriptableObject
 {
-    [Header("Shared fields")]
     public string nameItem;
     public Sprite imgItem;
     public float respawnTime = 1.0f;

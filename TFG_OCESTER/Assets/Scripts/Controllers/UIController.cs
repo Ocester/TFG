@@ -8,17 +8,15 @@ public class UIController : MonoBehaviour
 {
     private GameObject[] toolBtns;
     private Sprite currentToolSprite;
-
-
     private void OnEnable()
     {
         // Se suscribe al evento OnSelectedTool
-        EventManager.OnSelectedTool += ToggleSelection;
+        EventController.OnSelectedTool += ToggleSelection;
     }
 
     private void OnDisable()
     {
-        EventManager.OnSelectedTool -= ToggleSelection;
+        EventController.OnSelectedTool -= ToggleSelection;
     }
 
     void Start()
@@ -31,7 +29,7 @@ public class UIController : MonoBehaviour
     {
         foreach (var tool in toolBtns)
         {
-            if (tool.GetComponent<ButtonType>().toolType.ToString() != selectedTool.action.ToString())
+            if (tool.GetComponent<ToolSelection>().tool.action.ToString() != selectedTool.action.ToString())
             {
                 tool.GetComponent<Image>().color = Color.white;
             }

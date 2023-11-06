@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ToolTypeSO", menuName = "Scriptable Object/Tool Type", order = 1)]
 public class ToolTypeSO : ScriptableObject
 {
     public enum ToolTypeAction
@@ -10,6 +9,7 @@ public class ToolTypeSO : ScriptableObject
         Cut,
         Dig,
         Grab,
-        Point
+        Point,
+        Speak
     }
 }

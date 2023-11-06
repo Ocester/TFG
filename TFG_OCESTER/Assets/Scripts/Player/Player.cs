@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     
     public MovementController playerControllerMovement; 
     private Animator animatorController;
+    public float maxRange = 5f;
 
     // Start is called before the first frame update
     void Start()

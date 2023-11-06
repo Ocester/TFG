@@ -8,7 +8,7 @@ public class ToolSelection : MonoBehaviour
     private Color selectedColor = new Color32(233, 222, 110, 255);
     private Image btnImg;
     private Button btn;
-    [SerializeField] private ToolsSO tool;
+    public ToolsSO tool;
     private void Start()
     {
         btnImg = GetComponent<Image>();
@@ -18,7 +18,7 @@ public class ToolSelection : MonoBehaviour
    
     public void ToolSelected()
     {
-        EventManager.SelectedToolEvent(tool);
+        EventController.SelectedToolEvent(tool);
         btnImg.color = selectedColor;
     }
 }

@@ -8,9 +8,9 @@ using Random = UnityEngine.Random;
 public class EggSpawnRandom : MonoBehaviour
 {
     
-    [SerializeField] private EggSO[] eggs;
+    [SerializeField] private ItemCollectableSO[] eggs;
     [SerializeField] private Vector3 eggSize = new Vector3(2.5f, 2.5f, 0);
-    private EggSO egg;
+    private ItemCollectableSO egg;
     private SpriteRenderer spriteRenderer;
    
     void Start()
@@ -28,7 +28,7 @@ public class EggSpawnRandom : MonoBehaviour
         
         // Se añade el Srpite renderer para que se visualice
         spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = egg.img;
+        spriteRenderer.sprite = egg.imgItem;
         spriteRenderer.color = Color.white;
         spriteRenderer.sortingOrder = 4;
         transform.localScale = eggSize;

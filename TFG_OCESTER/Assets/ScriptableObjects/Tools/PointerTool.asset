@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PointerTool
   m_EditorClassIdentifier: 
   action: 3
-  imgAction: {fileID: 21300000, guid: 4df835fa69be44c968e12967a1c97bbd, type: 3}
-  imgActionDisabled: {fileID: 21300000, guid: fc6d22c88194e4e08b584a8a857bec62, type: 3}
+  imgAction: {fileID: 21300000, guid: 18d9254d907b6465c98de84946d95903, type: 3}
+  imgActionDisabled: {fileID: 21300000, guid: 4b0848c49c9af40b0b54b5605cc4fd3f, type: 3}

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GrabTool
   m_EditorClassIdentifier: 
   action: 2
-  imgAction: {fileID: 21300000, guid: 144dbda20b909405582920a66cb5fe0f, type: 3}
-  imgActionDisabled: {fileID: 21300000, guid: a702a5b5ee93b4277a734e1128f8c72d, type: 3}
+  imgAction: {fileID: 21300000, guid: d181ce6319a514c68934d0d59ab3da4a, type: 3}
+  imgActionDisabled: {fileID: 21300000, guid: 4a9fd53b711fc472d9035087f90e2e97, type: 3}

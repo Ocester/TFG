@@ -15,7 +15,18 @@ public class MovementController : MonoBehaviour
     private Vector2 dist;
     private Vector2 playerPosition;
     private Vector2 inputVector = new Vector2(0.0f, 0.0f);
-    
+    public static MovementController instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         executeAction = gameObject.GetComponent<ActionController>();
@@ -34,6 +45,7 @@ public class MovementController : MonoBehaviour
         // verificamos si hacemos clic con el ratón y no estamos clicando en una UI
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
+            Debug.Log("ExecuteAction");
             executeAction.Action();
         }
         if (Input.GetKeyDown(KeyCode.Q))

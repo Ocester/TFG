@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
+  m_Name: Quest0SO
+  m_EditorClassIdentifier: 
+  questName: My recipe book
+  questId: 0
+  startingNPC: {fileID: 11400000, guid: 61ee0538331bd4293b7d38156af844a7, type: 2}
+  questText: Libro de recetas
+  npcText: "Necesito que localices mi recetario por favor!! Creo que me lo olvid\xE9
+    en un cofre."
+  finishedQuestText: Gracias por el libro, te estoy muy agradecida.
+  allIngredientsQuestText: Has encontrado el libro de Recetas!!
+  recipe: {fileID: 11400000, guid: c8b78b0f893ce4bcb9f3d7c856593742, type: 2}
+  nextQuest: {fileID: 11400000, guid: 95e3ae36fa5de4c108853a07ee4e9c97, type: 2}
+  started: 1
+  finished: 1
+  itemsColected: 1

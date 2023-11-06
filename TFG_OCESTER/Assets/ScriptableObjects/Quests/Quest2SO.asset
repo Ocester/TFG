@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
+  m_Name: Quest2SO
+  m_EditorClassIdentifier: 
+  questName: Carrot Cake
+  questId: 2
+  startingNPC: {fileID: 11400000, guid: 6581251cc423c4d008d30e879039b8fc, type: 2}
+  questText: "Recolecta los ingredientes de la tarta de zanahoria\t"
+  npcText: Hola! necesito hacer tarta de zanahoria
+  finishedQuestText: Muchas gracias, ya puede hacer tarta de zanahoria.
+  allIngredientsQuestText: Muy bien ya tienes todos los ingredientes.
+  recipe: {fileID: 11400000, guid: 081b8913e0e514077980f3d93cb989cd, type: 2}
+  nextQuest: {fileID: 0}
+  started: 1
+  finished: 0
+  itemsColected: 0
