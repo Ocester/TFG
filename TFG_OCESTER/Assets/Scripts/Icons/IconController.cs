@@ -10,8 +10,8 @@ public class IconController : MonoBehaviour
     private QuestController questController;
     private int currentQuestIndex=0; // index de las quests que puede ofrecer el NPC
     private QuestSO quest, currentQuest;
-  
-    void Start()
+
+    private void Awake()
     {
         EventController.activateIconQuest += ActivateIcon;
         EventController.deactivateIconQuest += DeactivateIcon;
@@ -21,6 +21,11 @@ public class IconController : MonoBehaviour
         quest = questController.GetCurrentQuest();
         currentQuest = GetCurrentQuest(quest);
         iconAnim.enabled = false;
+    }
+
+    private void Start()
+    {
+        
     }
     
     private QuestSO GetCurrentQuest( QuestSO checkQuest)

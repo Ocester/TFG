@@ -2,6 +2,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEditor;
+using System.Collections;
 using UnityEngine;
 
 public class ActionController : MonoBehaviour
@@ -24,6 +25,7 @@ public class ActionController : MonoBehaviour
     private bool isGrabable = false;
     private ItemCollectableSO item;
     public static ActionController instance;
+    
     private void Awake()
     {
         if (instance == null)
@@ -116,9 +118,22 @@ public class ActionController : MonoBehaviour
         }
         item = hit.collider.gameObject.GetComponent<GrabItem>().GetItem();
         questController.GetItem(item);
-        Destroy(hit.collider.gameObject);
+        //Destroy(hit.collider.gameObject);
+        hit.collider.gameObject.SetActive(false);
+        if (item.respawnTime==0) return;
+        StartCoroutine(RespawnItem(hit.collider.gameObject, item.respawnTime));
+    }
+    IEnumerator RespawnItem(GameObject obj, float delay)
+    {
+        // Esperar el tiempo especificado
+        yield return new WaitForSeconds(delay);
 
-        
+        // Llamar a la función con el parámetro
+        Respawn(obj);
+    }
+    private void Respawn(GameObject itemToRespawn)
+    {
+        itemToRespawn.SetActive(true);
     }
 
     public void Speak()

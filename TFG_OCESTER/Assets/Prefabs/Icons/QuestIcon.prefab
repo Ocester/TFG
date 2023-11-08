@@ -120,3 +120,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconAnim: {fileID: 1015115632997907789}
+  quests: []

@@ -70,6 +70,5 @@ public class EventController : MonoBehaviour
     {
         changeDialogPic?.Invoke(charImg);
     }
-    
-    
+
 }

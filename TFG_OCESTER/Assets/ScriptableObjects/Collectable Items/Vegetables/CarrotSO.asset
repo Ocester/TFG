@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: Carrot
   imgItem: {fileID: -1385600370, guid: 15423eed782534b9097e860697376e50, type: 3}
-  respawnTime: 1
+  respawnTime: 6
   collectTool: {fileID: 11400000, guid: 530e59ebdbd72444fa7738c162da05f9, type: 2}
   itemType: 2

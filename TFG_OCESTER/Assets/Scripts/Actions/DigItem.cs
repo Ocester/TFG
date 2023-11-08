@@ -67,7 +67,7 @@ public class DigItem : MonoBehaviour
         if (other.gameObject.name == "UpHit" || other.gameObject.name == "DownHit" || other.gameObject.name == "RightHit" || other.gameObject.name == "LeftHit")
         {
             Debug.Log("DIG HIT!!!!");
-            //Invoke("Activate", item.respawnTime);
+            Invoke("Activate", item.respawnTime);
             questController.GetItem(item);
             gameObject.SetActive(false);
             //Destroy(gameObject);
@@ -89,11 +89,9 @@ public class DigItem : MonoBehaviour
             selectedAction.SetAction(true);
         }
     }
-
     private void Activate()
     {
         gameObject.SetActive(true);
-        
     }
 
 }

@@ -14,7 +14,7 @@ public class GrabItem : MonoBehaviour
     private QuestController questController;
     [SerializeField] private bool insideArea = false;
     [SerializeField] private bool canBeGrabbed = false;
-    [SerializeField] private float maxDistance = 0.8f;
+    private float maxDistance = 1f;
     private Ray ray;
     private RaycastHit2D hit;
     private GameObject player;
@@ -51,7 +51,7 @@ public class GrabItem : MonoBehaviour
         {
             return;
         }
-        //Debug.Log("Entro IsCurrentQuestItem: "+ questController.GetCurrentQuest().recipe.recipeName);
+        //Debug.Log("->> IsCurrentQuestItem: "+ questController.GetCurrentQuest().recipe.recipeName);
         canBeGrabbed = false;
         foreach (var element in checkQuest.recipe.elements)
         {
@@ -119,5 +119,6 @@ public class GrabItem : MonoBehaviour
         }
         insideArea = false;
     }
+    
   
 }

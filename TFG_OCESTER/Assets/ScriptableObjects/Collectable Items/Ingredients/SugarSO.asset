@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: Sugar
   imgItem: {fileID: 766934997, guid: 15423eed782534b9097e860697376e50, type: 3}
-  respawnTime: 0
+  respawnTime: 4
   collectTool: {fileID: 11400000, guid: 5d41db6bad2d1483a87f2f36dc10ad11, type: 2}
   itemType: 4

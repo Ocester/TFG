@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: Egg Yellow
   imgItem: {fileID: -482134390, guid: c852e372e61614c958a4dfa76729f60a, type: 3}
-  respawnTime: 1
+  respawnTime: 3
   collectTool: {fileID: 11400000, guid: 5d41db6bad2d1483a87f2f36dc10ad11, type: 2}
   itemType: 0

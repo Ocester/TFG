@@ -16,14 +16,12 @@ public class PointItem : MonoBehaviour
     
     private void OnMouseOver()
     {
-        Debug.Log("OnOmuseOver -> "+gameObject.name);
         if (selectedAction.getTool().action != pointerTool.action)
         {
             return;
         }
         selectedAction.SetAction(true);
     }
-    
     private void OnMouseExit()
     {
         selectedAction.SetAction(false);

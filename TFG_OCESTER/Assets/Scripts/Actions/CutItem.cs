@@ -14,29 +14,12 @@ public class CutItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventController.completeQuest += CheckNextQuest;
         selectedAction = GameObject.FindObjectOfType<ActionController>();
-        questController = GameObject.FindObjectOfType<QuestController>();
-        IsCurrentQuestItem();
-    }
-    private void IsCurrentQuestItem()
-    {
-        foreach (var element in questController.GetCurrentQuest().recipe.elements)
-        {
-            if (item.nameItem == element.requiredItem.nameItem)
-            {
-                canBeCut = true;
-            }
         }
-    }
-    private void CheckNextQuest(QuestSO checkQuest)
-    {
-        IsCurrentQuestItem();
-    }
 
     private void OnMouseOver()
     {
-        if (selectedAction.getTool().action != item.collectTool.action || !canBeCut)
+        if (selectedAction.getTool().action != item.collectTool.action)
         {
             Cursor.SetCursor(selectedAction.getTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
         }
@@ -44,7 +27,8 @@ public class CutItem : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (selectedAction.getTool().action != item.collectTool.action || !canBeCut)
+        
+        if (selectedAction.getTool().action != item.collectTool.action )   
         {
             Cursor.SetCursor(selectedAction.getTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
         }
@@ -52,7 +36,9 @@ public class CutItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (selectedAction.getTool().action != item.collectTool.action || !canBeCut) {
+        
+        if (selectedAction.getTool().action != item.collectTool.action)
+        {
             selectedAction.SetAction(false);
             return;
         }
@@ -61,7 +47,7 @@ public class CutItem : MonoBehaviour
         {
             Debug.Log("CUT HIT!!");
            
-            questController.GetItem(item);
+            //questController.GetItem(item);
             gameObject.SetActive(false);
             Invoke("Activate", item.respawnTime);
         };
@@ -69,7 +55,9 @@ public class CutItem : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (selectedAction.getTool().action != item.collectTool.action || !canBeCut) {
+         
+        if (selectedAction.getTool().action != item.collectTool.action)
+        {
             return;
         }
         selectedAction.SetAction(true);
@@ -78,7 +66,6 @@ public class CutItem : MonoBehaviour
     private void Activate()
     {
         gameObject.SetActive(true);
-        
     }
     
     
