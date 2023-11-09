@@ -11,7 +11,12 @@ public class PointItem : MonoBehaviour
     
     void Start()
     {
+        EventController.OnFinishLevel += FinishLevel;
         selectedAction = GameObject.FindObjectOfType<ActionController>();
+    }
+    private void FinishLevel()
+    {
+        gameObject.SetActive(false);
     }
     
     private void OnMouseOver()

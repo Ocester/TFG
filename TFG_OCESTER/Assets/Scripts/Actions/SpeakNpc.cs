@@ -18,11 +18,16 @@ public class SpeakNpc : MonoBehaviour
     private void Start()
     {
         EventController.checkNextQuest += CheckNextQuest;
+        EventController.OnFinishLevel += FinishLevel;
         selectedAction = GameObject.FindObjectOfType<ActionController>();
         questController = GameObject.FindObjectOfType<QuestController>();
         quest = questController.GetCurrentQuest();
         currentQuest = GetCurrentQuest(quest);
         CanBeSpokenNpc();
+    }
+    private void FinishLevel()
+    {
+        gameObject.SetActive(false);
     }
 
     private void Update()

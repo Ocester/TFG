@@ -15,6 +15,7 @@ public class ActionController : MonoBehaviour
     [SerializeField] private ToolsSO dig;
     [SerializeField] private ToolsSO cut;
     [SerializeField] private ToolsSO speak;
+    private Sprite pointerSprite;
     private MovementController movement;
     private QuestController questController;
     private Vector2 dist;
@@ -22,7 +23,7 @@ public class ActionController : MonoBehaviour
     private ToolsSO currentTool;
     [SerializeField]private bool action = true;
     [SerializeField] private Sprite CharImg;
-    private bool isGrabable = false;
+    //private bool isGrabable = false;
     private ItemCollectableSO item;
     public static ActionController instance;
     
@@ -41,11 +42,19 @@ public class ActionController : MonoBehaviour
     {
         // Se suscribe al evento OnSelectedTool
         EventController.OnSelectedTool += SelectTool;
+        EventController.OnFinishLevel += FinishLevel;
+    }
+
+    private void FinishLevel()
+    {
+        Debug.Log(pointer.imgAction.texture.name);
+        Cursor.SetCursor(pointer.imgAction.texture, Vector2.zero, CursorMode.Auto);
     }
 
     private void OnDisable()
     {
         EventController.OnSelectedTool -= SelectTool;
+        EventController.OnFinishLevel -= FinishLevel;
     }
    void Start()
     {

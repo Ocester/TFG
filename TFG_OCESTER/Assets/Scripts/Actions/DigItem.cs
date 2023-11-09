@@ -12,10 +12,17 @@ public class DigItem : MonoBehaviour
     void Start()
     {
         EventController.activateItem += CheckNextQuest;
+        EventController.OnFinishLevel += FinishLevel;
         selectedAction = GameObject.FindObjectOfType<ActionController>();
         questController = GameObject.FindObjectOfType<QuestController>();
     }
     
+
+    private void FinishLevel()
+    {
+        gameObject.SetActive(false);
+    }
+
     private void IsCurrentQuestItem(QuestSO checkQuest) {
         if (!checkQuest)
         {

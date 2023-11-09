@@ -9,13 +9,18 @@ public class CutItem : MonoBehaviour
     [SerializeField] private ItemCollectableSO item;
     private ActionController selectedAction;
     private QuestController questController;
-    [SerializeField]private bool canBeCut = false;
+    //[SerializeField]private bool canBeCut = false;
     
     // Start is called before the first frame update
     void Start()
     {
+        EventController.OnFinishLevel += FinishLevel;
         selectedAction = GameObject.FindObjectOfType<ActionController>();
-        }
+    }
+    private void FinishLevel()
+    {
+        gameObject.SetActive(false);
+    }
 
     private void OnMouseOver()
     {

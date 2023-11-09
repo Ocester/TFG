@@ -16,6 +16,7 @@ public class EventController : MonoBehaviour
     public static Action<QuestSO> missionUpdateText;
     public static Action missionTextClear;
     public static Action<Sprite> changeDialogPic;
+    public static Action OnFinishLevel;
     
     public static EventController instance;
 
@@ -69,6 +70,10 @@ public class EventController : MonoBehaviour
     public static void ChangeDialogPicEvent(Sprite charImg)
     {
         changeDialogPic?.Invoke(charImg);
+    }
+    public static void FinishLevelEvent()
+    {
+        OnFinishLevel?.Invoke();
     }
 
 }

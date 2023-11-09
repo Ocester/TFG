@@ -25,10 +25,16 @@ public class GrabItem : MonoBehaviour
     {
         //EventController.completeQuest += CheckNextQuest; // comprobará si el elemento es un item de la quest en curso y lo activa
         EventController.activateItem += CheckNextQuest;
+        EventController.OnFinishLevel += FinishLevel;
         selectedAction = GameObject.FindObjectOfType<ActionController>();
         questController = GameObject.FindObjectOfType<QuestController>();
         player = GameObject.FindWithTag("Player");
     }
+    private void FinishLevel()
+    {
+        gameObject.SetActive(false);
+    }
+    
     
     private void Update()
     {

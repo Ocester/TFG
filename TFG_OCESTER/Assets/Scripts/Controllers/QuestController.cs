@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -32,6 +33,7 @@ public class QuestController : MonoBehaviour
         currentQuest = GetCurrentQuest();
         EventController.QuestIconActivateEvent(currentQuest);
         EventController.completeQuest += CompleteCurrentQuest;
+        
     }
     
     // ******* ELIMINAR EN ENTREGA FINAL UPDATE ******** //
@@ -53,7 +55,15 @@ public class QuestController : MonoBehaviour
         {
             return quests[currentQuestIndex];
         }
+        FinishLevel();
         return null;
+    }
+
+    private void FinishLevel()
+    {
+        Debug.Log("FIN DE NIVEL");
+        EventController.FinishLevelEvent();
+        Time.timeScale = 0f;
     }
 
     public void StartQuest()
