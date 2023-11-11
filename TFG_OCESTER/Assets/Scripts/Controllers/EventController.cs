@@ -12,7 +12,8 @@ public class EventController : MonoBehaviour
     public static Action<QuestSO> activateItem;
     public static Action<QuestSO> completeQuest;
     public static Action<QuestSO> checkNextQuest;
-    public static Action<string> dialogTextWrite;
+    public static Action<QuestSO> dialogTextWrite;
+    public static Action<string> pointObjectWrite;
     public static Action<QuestSO> missionUpdateText;
     public static Action missionTextClear;
     public static Action<Sprite> changeDialogPic;
@@ -55,9 +56,14 @@ public class EventController : MonoBehaviour
     {
         checkNextQuest?.Invoke(quest);
     }
-    public static void WriteDialogTextEvent(string text)
+    public static void WriteDialogTextEvent(QuestSO questText)
     {
-        dialogTextWrite?.Invoke(text);
+        dialogTextWrite?.Invoke(questText);
+    }
+    public static void PointObjectWrite(string text)
+    {
+        pointObjectWrite?.Invoke(text);
+        
     }
     public static void WriteMissionUpdateEvent(QuestSO quest)
     {
@@ -75,5 +81,7 @@ public class EventController : MonoBehaviour
     {
         OnFinishLevel?.Invoke();
     }
+
+    
 
 }

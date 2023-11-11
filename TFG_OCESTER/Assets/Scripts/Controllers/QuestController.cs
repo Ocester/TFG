@@ -75,7 +75,7 @@ public class QuestController : MonoBehaviour
         EventController.ChangeDialogPicEvent(currentQuest.startingNPC.imgNpc);
         // TEXTO DE LA QUEST.
         //Debug.Log(currentQuest.npcText);
-        EventController.WriteDialogTextEvent(currentQuest.npcText);
+       EventController.WriteDialogTextEvent(currentQuest);
         
         // AÑADIR A LA UI LA RECETA: Nº DE ITEMS Y SU CANTIDAD RECOLECTADA (AL INICIO 0)
         EventController.WriteMissionUpdateEvent(currentQuest);
@@ -86,10 +86,10 @@ public class QuestController : MonoBehaviour
     {
         if (currentQuest )
         {
+            currentQuest.finished = true;
             EventController.ChangeDialogPicEvent(currentQuest.startingNPC.imgNpc);
             EventController.ClearMissionTextEvent();
-            EventController.WriteDialogTextEvent(currentQuest.finishedQuestText);
-            currentQuest.finished = true;
+            EventController.WriteDialogTextEvent(currentQuest);
             EventController.QuestIconDeactivateEvent(currentQuest);
             currentQuestIndex++;
             currentQuest = GetCurrentQuest();
@@ -116,7 +116,7 @@ public class QuestController : MonoBehaviour
             EventController.QuestIconActivateEvent(currentQuest);
             // Se ecribe el texto de ingredientes completados
             //Debug.Log(currentQuest.allIngredientsQuestText);
-            EventController.WriteDialogTextEvent(currentQuest.allIngredientsQuestText);
+            EventController.WriteDialogTextEvent(currentQuest);
         }
     }
     private bool IsRecipeCompleted()

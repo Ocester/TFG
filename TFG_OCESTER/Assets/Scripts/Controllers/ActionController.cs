@@ -108,7 +108,7 @@ public class ActionController : MonoBehaviour
         if (hit.collider)
         {
             EventController.ChangeDialogPicEvent(CharImg);
-            EventController.WriteDialogTextEvent(hit.collider.gameObject.name);
+            EventController.PointObjectWrite(hit.collider.gameObject.name);
             action = false;
         }
         

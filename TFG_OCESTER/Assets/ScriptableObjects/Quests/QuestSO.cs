@@ -9,9 +9,9 @@ public class QuestSO : ScriptableObject
     public int questId;
     public NpcSO startingNPC;
     [TextArea] public string questText;
-    [TextArea] public string npcText;
-    [TextArea] public string finishedQuestText;
-    [TextArea] public string allIngredientsQuestText;
+    [TextArea(3,6)] public string[] npcText;
+    [TextArea(3,6)] public string [] finishedQuestText;
+    [TextArea] public string [] allIngredientsQuestText;
     public RecipeSO recipe;
     //public QuestSO nextQuest;
     public bool started;

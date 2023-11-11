@@ -16,12 +16,14 @@ MonoBehaviour:
   questId: 0
   startingNPC: {fileID: 11400000, guid: 61ee0538331bd4293b7d38156af844a7, type: 2}
   questText: Libro de recetas
-  npcText: "Necesito que localices mi recetario por favor!! Creo que me lo olvid\xE9
-    en un cofre."
-  finishedQuestText: Gracias por el libro, te estoy muy agradecida.
-  allIngredientsQuestText: Has encontrado el libro de Recetas!!
+  npcText:
+  - "Hola, necesito que encuentres mi recetario para poder cocinar nuevas recetas.\t"
+  - "Creo que lo han visto por \xFAltima vez dentro de un cofre."
+  finishedQuestText:
+  - "\xA1\xA1Muchas gracias por encontralo!!"
+  allIngredientsQuestText:
+  - "\xA1Ya lo has encontrado!"
   recipe: {fileID: 11400000, guid: c8b78b0f893ce4bcb9f3d7c856593742, type: 2}
-  nextQuest: {fileID: 11400000, guid: 95e3ae36fa5de4c108853a07ee4e9c97, type: 2}
   started: 1
-  finished: 1
-  itemsColected: 1
+  finished: 0
+  itemsColected: 0

@@ -16,11 +16,15 @@ MonoBehaviour:
   questId: 2
   startingNPC: {fileID: 11400000, guid: 6581251cc423c4d008d30e879039b8fc, type: 2}
   questText: "Recolecta los ingredientes de la tarta de zanahoria\t"
-  npcText: Hola! necesito hacer tarta de zanahoria
-  finishedQuestText: Muchas gracias, ya puede hacer tarta de zanahoria.
-  allIngredientsQuestText: Muy bien ya tienes todos los ingredientes.
+  npcText:
+  - "\xA1Hola! menos mal que te encuentro, necesito que consultes en tu recetario."
+  - Necesito hacer una tarta de zanahora, pero no se los ingredientes necesarios
+  - "\xBFPodr\xEDas consultarlo en t\xFA recetario?"
+  finishedQuestText:
+  - "\xA1muchas gracias! voy a preparar la mejor tarta de zanahora del festival."
+  allIngredientsQuestText:
+  - "\xA1muy bien ya los tienes todos!"
   recipe: {fileID: 11400000, guid: 081b8913e0e514077980f3d93cb989cd, type: 2}
-  nextQuest: {fileID: 0}
-  started: 1
+  started: 0
   finished: 0
   itemsColected: 0
