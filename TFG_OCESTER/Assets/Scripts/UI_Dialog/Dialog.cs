@@ -14,6 +14,7 @@ public class Dialog : MonoBehaviour
     private int lineIndex;
     private bool dialogStarted;
     private bool dialogFinished;
+    private bool dialogHidden;
     
     void Start()
     {
@@ -24,6 +25,7 @@ public class Dialog : MonoBehaviour
         textUI.enabled = false;
         dialogStarted = false;
         dialogFinished = true;
+        dialogHidden = true;
     }
 
     private void OnDisable()
@@ -35,7 +37,7 @@ public class Dialog : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && dialogStarted && !dialogFinished)
+        if (Input.GetMouseButtonDown(0) && dialogStarted && !dialogFinished && dialogHidden)
         {
             if (!dialogStarted)
             {
@@ -46,11 +48,17 @@ public class Dialog : MonoBehaviour
                 nextLine();
             }
         }
+
+        if (Input.GetMouseButtonDown(0) && dialogFinished)
+        {
+            dialogObjet.GetComponent<SpriteRenderer>().enabled=false;
+            arrowSprite.SetActive(false);
+            textUI.enabled = false;
+        }
     }
 
     private void ChangeCharacterPic(Sprite charImg)
     {
-        Debug.Log("character pic -> " + charSpeakImg.GetComponent<SpriteRenderer>().sprite);
         charSpeakImg.GetComponent<SpriteRenderer>().sprite = charImg;
     }
     private void WritePointerText(string txt)
@@ -72,19 +80,11 @@ public class Dialog : MonoBehaviour
             dialogFinished = true;
         }
     }
-
-    IEnumerator HideDialogText()
-    {
-        yield return new WaitForSecondsRealtime(2f);
-        dialogObjet.GetComponent<SpriteRenderer>().enabled=false;
-        textUI.enabled = false;
-    }
-    
+  
 
     IEnumerator WriteLine( )
-    {
-        arrowSprite.GetComponent<SpriteRenderer>().enabled = false;
-        
+    {   
+        Time.timeScale = 0f;
         textUI.text = string.Empty;
         foreach (char c in dialogText[lineIndex])
         {
@@ -93,16 +93,20 @@ public class Dialog : MonoBehaviour
         }
         if (lineIndex == dialogText.Length-1)
         {
-            StartCoroutine(HideDialogText());
+            arrowSprite.SetActive(false);
         }
-        else
+        else if (lineIndex < dialogText.Length-1)
         {
-            arrowSprite.GetComponent<SpriteRenderer>().enabled = true;
+      
+            arrowSprite.SetActive(true);
         }
+        Time.timeScale = 1f;
     }
     
     private void WriteText(QuestSO quest)
     {
+        arrowSprite.SetActive(false);
+        dialogHidden = true;
         dialogStarted = true;
         dialogFinished = false;
         lineIndex = 0;
@@ -119,7 +123,6 @@ public class Dialog : MonoBehaviour
             dialogText = quest.npcText;
         }
         dialogObjet.GetComponent<SpriteRenderer>().enabled=true;
-        
         textUI.enabled = true;
         StartCoroutine(WriteLine());
     }
