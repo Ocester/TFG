@@ -15,3 +15,4 @@ MonoBehaviour:
   action: 4
   imgAction: {fileID: 21300000, guid: 4a6f3c1366fd5485bb613c8c11a78014, type: 3}
   imgActionDisabled: {fileID: 21300000, guid: a3e545ea7f06f4ca0b0a9f8fc8b66f41, type: 3}
+  tooltip: Esta herramienta permite hablar con otros personajes.

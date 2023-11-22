@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class ActionController : MonoBehaviour
 {
-    public Animator playerAnim;
-    public Transform playerTr;
-    public Collider2D playerCollider;
+    private Animator playerAnim;
+    private Transform playerTr;
+    private Collider2D playerCollider;
     [SerializeField] private ToolsSO grab;
     [SerializeField] private ToolsSO pointer;
     [SerializeField] private ToolsSO dig;
@@ -23,7 +23,6 @@ public class ActionController : MonoBehaviour
     private ToolsSO currentTool;
     [SerializeField]private bool action = true;
     [SerializeField] private Sprite CharImg;
-    //private bool isGrabable = false;
     private ItemCollectableSO item;
     public static ActionController instance;
     
@@ -47,7 +46,6 @@ public class ActionController : MonoBehaviour
 
     private void FinishLevel()
     {
-        Debug.Log(pointer.imgAction.texture.name);
         Cursor.SetCursor(pointer.imgAction.texture, Vector2.zero, CursorMode.Auto);
     }
 
@@ -57,7 +55,10 @@ public class ActionController : MonoBehaviour
         EventController.OnFinishLevel -= FinishLevel;
     }
    void Start()
-    {
+   {
+       playerAnim = GameObject.FindWithTag("Player").GetComponent<Animator>();
+       playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
+       playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
         movement = gameObject.GetComponent<MovementController>();
         questController = GameObject.FindObjectOfType<QuestController>();
         currentTool = pointer;
@@ -93,7 +94,6 @@ public class ActionController : MonoBehaviour
 
     public void Action()
     {
-        //Debug.Log("Action -> " + action);
         if (currentTool.action == dig.action && action) Dig();
         else if (currentTool.action == cut.action && action) Cut();
         else if (currentTool.action == grab.action && action) Grab();
@@ -122,12 +122,10 @@ public class ActionController : MonoBehaviour
         
         if (!hit.collider || !hit.collider.gameObject.GetComponent<GrabItem>().GetItem())
         {
-            Debug.Log("No hit collider Grab.");
             return;
         }
         item = hit.collider.gameObject.GetComponent<GrabItem>().GetItem();
         questController.GetItem(item);
-        //Destroy(hit.collider.gameObject);
         hit.collider.gameObject.SetActive(false);
         if (item.respawnTime==0) return;
         StartCoroutine(RespawnItem(hit.collider.gameObject, item.respawnTime));
@@ -136,7 +134,6 @@ public class ActionController : MonoBehaviour
     {
         // Esperar el tiempo especificado
         yield return new WaitForSeconds(delay);
-
         // Llamar a la función con el parámetro
         Respawn(obj);
     }
@@ -148,11 +145,10 @@ public class ActionController : MonoBehaviour
     public void Speak()
     {
         action = false;// una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
-        Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        /*Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
         dist = clickPosition - playerPosition;
-        Debug.DrawLine(clickPosition,playerPosition,Color.red,5.0f);
-        //Debug.Log("Speak action!");
+        Debug.DrawLine(clickPosition,playerPosition,Color.red,5.0f);*/
         
     }
 
@@ -166,8 +162,6 @@ public class ActionController : MonoBehaviour
         Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
         dist = clickPosition - playerPosition;
-        
-        Debug.DrawLine(clickPosition,playerPosition,Color.red,5.0f);
         
         if (Mathf.Abs(dist.x) > Mathf.Abs(dist.y))
         {
@@ -196,8 +190,6 @@ public class ActionController : MonoBehaviour
         Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
         dist = clickPosition - playerPosition;
-        
-        Debug.DrawLine(clickPosition,playerPosition,Color.red,5.0f);
         
         if (Mathf.Abs(dist.x) > Mathf.Abs(dist.y))
         {

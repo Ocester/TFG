@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestController : MonoBehaviour
@@ -36,19 +31,6 @@ public class QuestController : MonoBehaviour
         
     }
     
-    // ******* ELIMINAR EN ENTREGA FINAL UPDATE ******** //
-    private void Update()
-    {
-        /*if (finalizarQuest && currentQuest)
-        {
-            EventController.QuestIconDeactivate(currentQuest);
-            EventController.CompleteQuest(currentQuest);
-            finalizarQuest = false;
-        }*/
-
-    }
-    // ************************************************ //
-    
     public QuestSO GetCurrentQuest()
     {
         if (currentQuestIndex < quests.Count)
@@ -74,7 +56,6 @@ public class QuestController : MonoBehaviour
         
         EventController.ChangeDialogPicEvent(currentQuest.startingNPC.imgNpc);
         // TEXTO DE LA QUEST.
-        //Debug.Log(currentQuest.npcText);
        EventController.WriteDialogTextEvent(currentQuest);
         
         // AÑADIR A LA UI LA RECETA: Nº DE ITEMS Y SU CANTIDAD RECOLECTADA (AL INICIO 0)

@@ -15,3 +15,4 @@ MonoBehaviour:
   action: 0
   imgAction: {fileID: 21300000, guid: fa6eb913e20ff4d2a8398a40b06385ee, type: 3}
   imgActionDisabled: {fileID: 21300000, guid: 803ad2a2628934499938d338a2483cd0, type: 3}
+  tooltip: Esta herramienta permite cortar objetos que bloquean el paso.

@@ -13,7 +13,6 @@ public class QuestSO : ScriptableObject
     [TextArea(3,6)] public string [] finishedQuestText;
     [TextArea] public string [] allIngredientsQuestText;
     public RecipeSO recipe;
-    //public QuestSO nextQuest;
     public bool started;
     public bool finished;
     public bool itemsColected;

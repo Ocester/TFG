@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 public class MovementController : MonoBehaviour
 {
     public Vector2 MovementSpeed = new Vector2(5f,5f);
-    public Rigidbody2D playerRb; 
-    public Animator playerAnim;
+    private Rigidbody2D playerRb; 
+    private Animator playerAnim;
     public bool isMoving = true;
     private ActionController executeAction;
     private Vector2 dist;
@@ -30,6 +30,8 @@ public class MovementController : MonoBehaviour
     private void Start()
     {
         executeAction = gameObject.GetComponent<ActionController>();
+        playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        playerAnim = GameObject.FindWithTag("Player").GetComponent<Animator>();
     }
 
     void Update()
@@ -45,7 +47,6 @@ public class MovementController : MonoBehaviour
         // verificamos si hacemos clic con el ratón y no estamos clicando en una UI
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("ExecuteAction");
             executeAction.Action();
         }
         if (Input.GetKeyDown(KeyCode.Q))

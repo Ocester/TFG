@@ -15,3 +15,4 @@ MonoBehaviour:
   action: 3
   imgAction: {fileID: 21300000, guid: 18d9254d907b6465c98de84946d95903, type: 3}
   imgActionDisabled: {fileID: 21300000, guid: 4b0848c49c9af40b0b54b5605cc4fd3f, type: 3}
+  tooltip: Esta herramienta permite saber el nombre del objeto clicado.

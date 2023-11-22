@@ -34,16 +34,6 @@ public class GrabItem : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    
-    
-    private void Update()
-    {
-        /*if (Input.GetMouseButtonDown(0) && insideArea && canBeGrabbed)
-        {
-            questController.GetItem(item);
-            Destroy(gameObject);
-        }*/
-    }
 
     public ItemCollectableSO GetItem()
     {
@@ -57,7 +47,6 @@ public class GrabItem : MonoBehaviour
         {
             return;
         }
-        //Debug.Log("->> IsCurrentQuestItem: "+ questController.GetCurrentQuest().recipe.recipeName);
         canBeGrabbed = false;
         foreach (var element in checkQuest.recipe.elements)
         {
@@ -107,7 +96,6 @@ public class GrabItem : MonoBehaviour
         }
         if (insideArea)
         {
-            Debug.Log("InsideArea && IsGrabable true: ");
             selectedAction.SetAction(true);
         }
         

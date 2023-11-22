@@ -16,12 +16,10 @@ public class MissionDetails : MonoBehaviour
         textUI.enabled = false;
     }
 
-    void Start()
+    private void OnDisable()
     {
-        /*EventController.missionUpdateText += WriteMissionText;
-        EventController.missionTextClear += ClearMissionText;
-        textUI = gameObject.GetComponent<TextMeshProUGUI>();
-        textUI.enabled = false;*/
+        EventController.missionUpdateText -= WriteMissionText;
+        EventController.missionTextClear -= ClearMissionText;
     }
 
     private void ClearMissionText()
