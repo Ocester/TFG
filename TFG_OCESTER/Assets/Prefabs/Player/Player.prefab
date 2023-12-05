@@ -389,7 +389,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 25
   m_Sprite: {fileID: -1816876843, guid: bf6ce4e21328d40ae9d5940c2a1b164b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -507,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControllerMovement: {fileID: 0}
+  maxRange: 5
 --- !u!1 &6239151866953646980
 GameObject:
   m_ObjectHideFlags: 0

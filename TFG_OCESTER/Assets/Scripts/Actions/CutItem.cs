@@ -9,9 +9,7 @@ public class CutItem : MonoBehaviour
     [SerializeField] private ItemCollectableSO item;
     private ActionController selectedAction;
     private QuestController questController;
-    //[SerializeField]private bool canBeCut = false;
-    
-    // Start is called before the first frame update
+
     void Start()
     {
         EventController.OnFinishLevel += FinishLevel;
@@ -50,11 +48,13 @@ public class CutItem : MonoBehaviour
         selectedAction.SetAction(true);
         if (other.gameObject.name == "UpHit" || other.gameObject.name == "DownHit" || other.gameObject.name == "RightHit" || other.gameObject.name == "LeftHit")
         {
+            EventController.CutObjectSound(MusicController.ActionSound.cutSound);
             Debug.Log("CUT HIT!!");
-           
-            //questController.GetItem(item);
             gameObject.SetActive(false);
-            Invoke("Activate", item.respawnTime);
+            if (item.respawnTime != 0)
+            {
+                Invoke("Activate", item.respawnTime);
+            }
         };
     }
 

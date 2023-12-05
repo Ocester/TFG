@@ -4,7 +4,7 @@ using UnityEngine;
 public class QuestController : MonoBehaviour
 {
     public List<QuestSO> quests;
-    [SerializeField] private int currentQuestIndex = 0;
+    [SerializeField] private int currentQuestIndex;
     [SerializeField]private QuestSO currentQuest;
     [SerializeField] private GameObject missionChart;
     public static QuestController instance;
@@ -25,6 +25,7 @@ public class QuestController : MonoBehaviour
     
     private void Start()
     {
+        currentQuestIndex = 0;
         currentQuest = GetCurrentQuest();
         EventController.QuestIconActivateEvent(currentQuest);
         EventController.completeQuest += CompleteCurrentQuest;

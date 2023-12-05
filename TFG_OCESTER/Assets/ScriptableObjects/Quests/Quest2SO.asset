@@ -19,12 +19,12 @@ MonoBehaviour:
   npcText:
   - "\xA1Hola! menos mal que te encuentro, \xA1necesito ayuda!"
   - "Tengo que  hacer una tarta de zanahora, pero no s\xE9 los ingredientes necesarios."
-  - "\xBFPodr\xEDas consultarlo en t\xFA recetario?"
+  - "\xBFPodr\xEDas consultarlo en t\xFA recetario? Necesito que los encuentres."
   finishedQuestText:
   - "\xA1muchas gracias! voy a preparar la mejor tarta de zanahora del festival."
   allIngredientsQuestText:
   - "\xA1muy bien ya los tienes todos!"
   recipe: {fileID: 11400000, guid: 081b8913e0e514077980f3d93cb989cd, type: 2}
-  started: 1
-  finished: 1
-  itemsColected: 1
+  started: 0
+  finished: 0
+  itemsColected: 0

@@ -17,13 +17,15 @@ MonoBehaviour:
   startingNPC: {fileID: 11400000, guid: 61ee0538331bd4293b7d38156af844a7, type: 2}
   questText: Libro de recetas
   npcText:
-  - "Hola, necesito que encuentres mi recetario para poder cocinar nuevas recetas.\t"
-  - "Creo que lo han visto por \xFAltima vez dentro de un cofre."
+  - Hola Trufo, menos mal que te he encontrado, necesito que me ayudes.
+  - "Ma\xF1ana es el festival de cocina de Kaio, y tengo que preparar un plato."
+  - Necesito que encuentres mi recetario para poder cocinar el mejor plato!!
+  - "Creo que lo vi por \xFAltima vez dentro de un cofre. \xBFpuedes encontrarlo?"
   finishedQuestText:
   - "\xA1\xA1Muchas gracias por encontralo!!"
   allIngredientsQuestText:
   - "\xA1Ya lo has encontrado!"
   recipe: {fileID: 11400000, guid: c8b78b0f893ce4bcb9f3d7c856593742, type: 2}
   started: 1
-  finished: 0
-  itemsColected: 0
+  finished: 1
+  itemsColected: 1

@@ -9,23 +9,25 @@ public class Dialog : MonoBehaviour
     [SerializeField] private GameObject dialogObjet;
     [SerializeField] private GameObject charSpeakImg;
     [SerializeField] private GameObject arrowSprite;
+    private UIController uiController;
     private TextMeshProUGUI textUI;
     private string [] dialogText;
     private int lineIndex;
     private bool dialogStarted;
     private bool dialogFinished;
-    private bool dialogHidden;
+    //private bool isPointerDialogUp;
     
     void Start()
     {
         EventController.dialogTextWrite += WriteText;
         EventController.pointObjectWrite += WritePointerText;
         EventController.changeDialogPic += ChangeCharacterPic;
+        uiController = FindObjectOfType<UIController>();
         textUI = gameObject.GetComponent<TextMeshProUGUI>();
         textUI.enabled = false;
         dialogStarted = false;
         dialogFinished = true;
-        dialogHidden = true;
+        //isPointerDialogUp = false;
     }
 
     private void OnDisable()
@@ -37,25 +39,47 @@ public class Dialog : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && dialogStarted && !dialogFinished && dialogHidden)
+        if (Input.GetMouseButtonDown(0) && dialogStarted && !dialogFinished )
         {
             if (!dialogStarted)
             {
-                WriteLine();
+                StartCoroutine(WriteLine());
             }
             else if (textUI.text == dialogText[lineIndex])
             {
                 nextLine();
             }
         }
-
-        if (Input.GetMouseButtonDown(0) && dialogFinished)
+        
+        /*if (Input.GetMouseButtonDown(0) && dialogStarted && dialogFinished)
         {
-            dialogObjet.GetComponent<SpriteRenderer>().enabled=false;
-            arrowSprite.SetActive(false);
-            textUI.enabled = false;
+            EndDialog();
         }
+       
+        if (Input.GetMouseButtonDown(0) && isPointerDialogUp)
+        {
+            EndPointerDialog();
+        }
+        */
+        
     }
+
+    private void EndDialog()
+    {
+        dialogObjet.GetComponent<SpriteRenderer>().enabled=false;
+        arrowSprite.SetActive(false);
+        textUI.enabled = false;
+        dialogStarted = false;
+    }
+
+    private void EndPointerDialog()
+    {
+        dialogObjet.GetComponent<SpriteRenderer>().enabled=false;
+        arrowSprite.SetActive(false);
+        textUI.enabled = false;
+        //isPointerDialogUp = false;
+    }
+
 
     private void ChangeCharacterPic(Sprite charImg)
     {
@@ -63,9 +87,10 @@ public class Dialog : MonoBehaviour
     }
     private void WritePointerText(string txt)
     {
-        dialogObjet.GetComponent<SpriteRenderer>().enabled=true;
-        textUI.text = txt;
+        //isPointerDialogUp = true;
+        dialogObjet.GetComponent<SpriteRenderer>().enabled = true;
         textUI.enabled = true;
+        textUI.text = txt;
     }
     
     private void nextLine()
@@ -78,10 +103,9 @@ public class Dialog : MonoBehaviour
         else
         {
             dialogFinished = true;
+            uiController.ActivateTools();
         }
     }
-  
-
     IEnumerator WriteLine( )
     {   
         Time.timeScale = 0f;
@@ -97,7 +121,6 @@ public class Dialog : MonoBehaviour
         }
         else if (lineIndex < dialogText.Length-1)
         {
-      
             arrowSprite.SetActive(true);
         }
         Time.timeScale = 1f;
@@ -105,8 +128,10 @@ public class Dialog : MonoBehaviour
     
     private void WriteText(QuestSO quest)
     {
+        EventController.DialogSound(MusicController.ActionSound.dialogSound);
+        uiController.DeactivateTools();
+        ChangeCharacterPic(quest.startingNPC.imgNpc);
         arrowSprite.SetActive(false);
-        dialogHidden = true;
         dialogStarted = true;
         dialogFinished = false;
         lineIndex = 0;

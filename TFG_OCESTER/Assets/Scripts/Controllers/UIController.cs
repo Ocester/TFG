@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Button = UnityEngine.UIElements.Button;
 
 public class UIController : MonoBehaviour
 {
     private GameObject[] toolBtns;
+    private GameObject uiToolsBar;
     private Sprite currentToolSprite;
     private void OnEnable()
     {
@@ -23,8 +25,8 @@ public class UIController : MonoBehaviour
     {
         // Se buscan todos los botones de la tool bar
         toolBtns = GameObject.FindGameObjectsWithTag("toolBtn");
+        uiToolsBar = GameObject.FindGameObjectWithTag("UI_ToolsBar");
     }
-
     private void ToggleSelection(ToolsSO selectedTool)
     {
         foreach (var tool in toolBtns)
@@ -39,6 +41,16 @@ public class UIController : MonoBehaviour
                 Cursor.SetCursor(currentToolSprite.texture, Vector2.zero, CursorMode.Auto);
             }
         }
+    }
+
+    public void DeactivateTools()
+    {
+        uiToolsBar.SetActive(false);
+    }
+    
+    public void ActivateTools()
+    {
+        uiToolsBar.SetActive(true);
     }
 
 }

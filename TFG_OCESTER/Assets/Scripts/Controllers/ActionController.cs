@@ -89,7 +89,7 @@ public class ActionController : MonoBehaviour
     public void SetAction(bool setAction)
     {
         action = setAction;
-        Debug.Log("Set Action -> " + action);
+        //Debug.Log("Set Action -> " + action);
     }
 
     public void Action()
@@ -109,6 +109,7 @@ public class ActionController : MonoBehaviour
         {
             EventController.ChangeDialogPicEvent(CharImg);
             EventController.PointObjectWrite(hit.collider.gameObject.name);
+            EventController.PointObjectSound(MusicController.ActionSound.pointSound);
             action = false;
         }
         
@@ -124,6 +125,7 @@ public class ActionController : MonoBehaviour
         {
             return;
         }
+        EventController.GrabObjectSound(MusicController.ActionSound.grabSound);
         item = hit.collider.gameObject.GetComponent<GrabItem>().GetItem();
         questController.GetItem(item);
         hit.collider.gameObject.SetActive(false);
@@ -145,6 +147,8 @@ public class ActionController : MonoBehaviour
     public void Speak()
     {
         action = false;// una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
+        
+        
         /*Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
         dist = clickPosition - playerPosition;

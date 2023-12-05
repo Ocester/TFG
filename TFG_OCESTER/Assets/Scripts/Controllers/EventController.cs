@@ -18,8 +18,13 @@ public class EventController : MonoBehaviour
     public static Action missionTextClear;
     public static Action<Sprite> changeDialogPic;
     public static Action OnFinishLevel;
+    public static Action<MusicController.ActionSound> pointObjectSound;
+    public static Action<MusicController.ActionSound> grabSound;
+    public static Action<MusicController.ActionSound> dialogSound;
+    public static Action<MusicController.ActionSound> digSound;
+    public static Action<MusicController.ActionSound> cutSound;
     
-    public static EventController instance;
+    private static EventController instance;
 
     private void Awake()
     {
@@ -63,7 +68,6 @@ public class EventController : MonoBehaviour
     public static void PointObjectWrite(string text)
     {
         pointObjectWrite?.Invoke(text);
-        
     }
     public static void WriteMissionUpdateEvent(QuestSO quest)
     {
@@ -81,7 +85,25 @@ public class EventController : MonoBehaviour
     {
         OnFinishLevel?.Invoke();
     }
-
+    public static void PointObjectSound(MusicController.ActionSound soundType)
+    {
+        pointObjectSound?.Invoke(soundType);
+    }
+    public static void DialogSound(MusicController.ActionSound soundType)
+    {
+        dialogSound?.Invoke(soundType);
+    }
+    public static void DigObjectSound(MusicController.ActionSound soundType)
+    {
+        digSound?.Invoke(soundType);
+    }
+    public static void GrabObjectSound(MusicController.ActionSound soundType)
+    {
+        grabSound?.Invoke(soundType);
+    }
+    public static void CutObjectSound(MusicController.ActionSound soundType)
+    {
+        cutSound?.Invoke(soundType);
+    }
     
-
 }

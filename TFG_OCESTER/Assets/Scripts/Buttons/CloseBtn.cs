@@ -14,6 +14,7 @@ public class CloseBtn : MonoBehaviour
     private void CloseSettings()
     {
         settingsMenu.SetActive(false);
+        
     }
 
 }

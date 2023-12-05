@@ -71,6 +71,7 @@ public class DigItem : MonoBehaviour
         // Se revisa si recibe el collider del tool
         if (other.gameObject.name == "UpHit" || other.gameObject.name == "DownHit" || other.gameObject.name == "RightHit" || other.gameObject.name == "LeftHit")
         {
+            EventController.DigObjectSound(MusicController.ActionSound.digSound);
             Debug.Log("DIG HIT!!!!");
             Invoke("Activate", item.respawnTime);
             questController.GetItem(item);

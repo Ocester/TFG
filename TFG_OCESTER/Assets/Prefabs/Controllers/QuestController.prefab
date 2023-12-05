@@ -48,6 +48,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 268c69053d4004120a02da3477906b2e, type: 2}
   - {fileID: 11400000, guid: 95e3ae36fa5de4c108853a07ee4e9c97, type: 2}
   - {fileID: 11400000, guid: a0c9a01e1017e4b30ac8bf0e1d5cff2c, type: 2}
+  - {fileID: 11400000, guid: 29188c3b882324a5ea47f6a64c0c44f0, type: 2}
   currentQuestIndex: 0
   currentQuest: {fileID: 0}
   missionChart: {fileID: 0}
