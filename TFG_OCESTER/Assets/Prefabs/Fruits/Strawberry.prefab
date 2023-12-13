@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2189840177174708231}
   - component: {fileID: 4024441201466858938}
   - component: {fileID: 5260801430697402008}
-  - component: {fileID: 4438845642162786161}
   - component: {fileID: 6780606489044332123}
   m_Layer: 0
   m_Name: Strawberry
@@ -116,51 +115,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointerTool: {fileID: 11400000, guid: 36ca1df48f8d74e2cb2ba8a91ff10e51, type: 2}
---- !u!61 &4438845642162786161
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8067044646439675359}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0052660704, y: 0.0131652355}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.34957862, y: 0.3074503}
-  m_EdgeRadius: 0
 --- !u!61 &6780606489044332123
 BoxCollider2D:
   m_ObjectHideFlags: 0

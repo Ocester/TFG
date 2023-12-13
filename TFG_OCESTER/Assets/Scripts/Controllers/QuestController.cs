@@ -7,15 +7,15 @@ public class QuestController : MonoBehaviour
     [SerializeField] private int currentQuestIndex;
     [SerializeField]private QuestSO currentQuest;
     [SerializeField] private GameObject missionChart;
-    public static QuestController instance;
-    public bool finalizarQuest = false; // eliminar en entrega final
-    private bool questFinished = false;
-   
+    private bool _questFinished;
+    public bool allQuestsFinished;
+    public static QuestController Instance;
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -25,11 +25,12 @@ public class QuestController : MonoBehaviour
     
     private void Start()
     {
+        _questFinished = false;
         currentQuestIndex = 0;
         currentQuest = GetCurrentQuest();
         EventController.QuestIconActivateEvent(currentQuest);
-        EventController.completeQuest += CompleteCurrentQuest;
-        
+        EventController.CompleteQuest += CompleteCurrentQuest;
+        allQuestsFinished = false;
     }
     
     public QuestSO GetCurrentQuest()
@@ -38,22 +39,24 @@ public class QuestController : MonoBehaviour
         {
             return quests[currentQuestIndex];
         }
-        FinishLevel();
         return null;
     }
-
-    private void FinishLevel()
-    {
-        Debug.Log("FIN DE NIVEL");
-        EventController.FinishLevelEvent();
-        Time.timeScale = 0f;
-    }
-
     public void StartQuest()
     {
         currentQuest.started = true;
-        
-        if(!missionChart.activeSelf){missionChart.SetActive(true);}
+
+        //si es la última quest tiene un tratamiento especial, solo muestra texto de la quest no hay que recolectar nada
+        if (currentQuestIndex == quests.Count-1)
+        {
+            allQuestsFinished = true;
+            EventController.ChangeDialogPicEvent(currentQuest.startingNPC.imgNpc);
+            EventController.WriteDialogTextEvent(currentQuest);
+            return;
+        }
+        if (!missionChart.activeSelf)
+        {
+            missionChart.SetActive(true);
+        }
         
         EventController.ChangeDialogPicEvent(currentQuest.startingNPC.imgNpc);
         // TEXTO DE LA QUEST.
@@ -97,23 +100,20 @@ public class QuestController : MonoBehaviour
             // Se activa el icono del NPC para entregar los ingredientes
             EventController.QuestIconActivateEvent(currentQuest);
             // Se ecribe el texto de ingredientes completados
-            //Debug.Log(currentQuest.allIngredientsQuestText);
             EventController.WriteDialogTextEvent(currentQuest);
         }
     }
     private bool IsRecipeCompleted()
     {
-        questFinished = true;
+        _questFinished = true;
         foreach (var element in currentQuest.recipe.elements)
         {
             if (element.collectedQuantity < element.quantity )
             {
-                questFinished = false;
+                _questFinished = false;
                 break;
             }
         }
-        return questFinished;
+        return _questFinished;
     }
-
-
 }

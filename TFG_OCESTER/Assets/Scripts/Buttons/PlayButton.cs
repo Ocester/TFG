@@ -9,13 +9,12 @@ public class PlayButton : MonoBehaviour
     private void Start()
     {
       gameObject.GetComponent<Button>().onClick.AddListener(PlayGame);
-      //loaderController = GameObject.FindObjectOfType<LoaderController>();
+      
     }
 
     private void PlayGame()
     {
         gameObject.GetComponent<Image>().sprite = btnImg;
         loaderScreen.GetComponent<LoaderController>().LoadNextLevel();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

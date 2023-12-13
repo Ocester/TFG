@@ -45,9 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c1e6a6fb545b4c7b8747dfd6757495d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: {x: 5, y: 5}
-  playerRb: {fileID: 0}
-  playerAnim: {fileID: 0}
+  movementSpeed: {x: 5, y: 5}
   isMoving: 1
 --- !u!114 &7187673343562428280
 MonoBehaviour:
@@ -61,13 +59,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64687a57f6e34337b26b88d9f3d937a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnim: {fileID: 0}
-  playerTr: {fileID: 0}
-  playerCollider: {fileID: 0}
   grab: {fileID: 11400000, guid: 5d41db6bad2d1483a87f2f36dc10ad11, type: 2}
   pointer: {fileID: 11400000, guid: 36ca1df48f8d74e2cb2ba8a91ff10e51, type: 2}
   dig: {fileID: 11400000, guid: 530e59ebdbd72444fa7738c162da05f9, type: 2}
   cut: {fileID: 11400000, guid: e9cc2c2434bef469f9c2b7a915b1c3d1, type: 2}
   speak: {fileID: 11400000, guid: 58b77188f04fe4dc682cd3ed0393330f, type: 2}
-  action: 1
-  CharImg: {fileID: 1838265184, guid: 1b83257429d14406cb1333d93dd43567, type: 3}
+  actionPermitted: 0
+  charImg: {fileID: 1838265184, guid: 1b83257429d14406cb1333d93dd43567, type: 3}

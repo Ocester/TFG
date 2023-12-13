@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: Milk
   imgItem: {fileID: 1605032892, guid: 060f3db5dae274fa78753c251b47a9e7, type: 3}
-  respawnTime: 4
+  respawnTime: 10
   collectTool: {fileID: 11400000, guid: 5d41db6bad2d1483a87f2f36dc10ad11, type: 2}
   itemType: 4

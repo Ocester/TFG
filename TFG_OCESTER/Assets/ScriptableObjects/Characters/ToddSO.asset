@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ffbb23408fc425398f4bc9d41dcc99, type: 3}
+  m_Name: ToddSO
+  m_EditorClassIdentifier: 
+  nameNpc: 
+  imgNpc: {fileID: 21300000, guid: 3d0a79db0553f4219ab1ab63bb2b4cf8, type: 3}
+  interactionTool: {fileID: 11400000, guid: 58b77188f04fe4dc682cd3ed0393330f, type: 2}

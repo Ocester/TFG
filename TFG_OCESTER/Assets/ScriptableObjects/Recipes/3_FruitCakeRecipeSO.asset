@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790790bf163754697b7bba47a8fd4853, type: 3}
+  m_Name: 3_FruitCakeRecipeSO
+  m_EditorClassIdentifier: 
+  recipeName: Fruit cake
+  recipeId: 3
+  elements:
+  - requiredItem: {fileID: 11400000, guid: 159118d321309411db673d0ea2831a4c, type: 2}
+    quantity: 3
+    collectedQuantity: 0
+  - requiredItem: {fileID: 11400000, guid: 82726877e87ab471b9823b2b3cf2b77a, type: 2}
+    quantity: 5
+    collectedQuantity: 0
+  - requiredItem: {fileID: 11400000, guid: b2113e047637440458b8e07d025b6fca, type: 2}
+    quantity: 5
+    collectedQuantity: 0

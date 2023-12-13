@@ -1,36 +1,32 @@
-
-using System;
-using Unity.VisualScripting;
-using UnityEditor;
 using System.Collections;
 using UnityEngine;
 
 public class ActionController : MonoBehaviour
 {
-    private Animator playerAnim;
-    private Transform playerTr;
-    private Collider2D playerCollider;
+    private Animator _playerAnim;
+    private Transform _playerTr;
+    private Collider2D _playerCollider;
     [SerializeField] private ToolsSO grab;
     [SerializeField] private ToolsSO pointer;
     [SerializeField] private ToolsSO dig;
     [SerializeField] private ToolsSO cut;
     [SerializeField] private ToolsSO speak;
-    private Sprite pointerSprite;
-    private MovementController movement;
-    private QuestController questController;
-    private Vector2 dist;
-    private Vector2 playerPosition;
-    private ToolsSO currentTool;
-    [SerializeField]private bool action = true;
-    [SerializeField] private Sprite CharImg;
-    private ItemCollectableSO item;
-    public static ActionController instance;
-    
+    private Sprite _pointerSprite;
+    private Vector2 _dist;
+    private Vector2 _playerPosition;
+    private ToolsSO _currentTool;
+    [SerializeField]private bool actionPermitted;
+    [SerializeField] private Sprite charImg;
+    private ItemCollectableSO _item;
+    private bool _startQuest, _completeQuest;
+
+    public static ActionController Instance;
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -54,70 +50,69 @@ public class ActionController : MonoBehaviour
         EventController.OnSelectedTool -= SelectTool;
         EventController.OnFinishLevel -= FinishLevel;
     }
-   void Start()
-   {
-       playerAnim = GameObject.FindWithTag("Player").GetComponent<Animator>();
-       playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
-       playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
-        movement = gameObject.GetComponent<MovementController>();
-        questController = GameObject.FindObjectOfType<QuestController>();
-        currentTool = pointer;
-    }
 
-   public ToolsSO getTool()
+    private void Start()
    {
-       return currentTool;
+       _playerAnim = GameObject.FindWithTag("Player").GetComponent<Animator>();
+       _playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
+       _playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
+       _currentTool = pointer;
+       actionPermitted = true;
+   }
+
+   public ToolsSO GetTool()
+   {
+       return _currentTool;
    }
    
     public void SelectTool (ToolsSO toolSelected)
     {
-        currentTool = toolSelected;
+        _currentTool = toolSelected;
         // cada vez que se cambia el tool se bloquea la acción hasta que no se compruebe que se puede
         // realizar con el nuevo tool seleccionado
-        action = false;
+        actionPermitted = false;
         
         // Se obtine la posición del collider y se mueve lo mínimo para que detecte el cambio de tool
         // el collider, ya que o collider Stay no lo gestiona como necesito.
-        Vector2 colliderPositon = playerCollider.offset;
+        Vector2 colliderPositon = _playerCollider.offset;
         float newPos = 0.1f; 
-        playerCollider.offset = new Vector2(colliderPositon.x + newPos, colliderPositon.y);
-        playerCollider.offset = colliderPositon;
+        _playerCollider.offset = new Vector2(colliderPositon.x + newPos, colliderPositon.y);
+        _playerCollider.offset = colliderPositon;
     }
     
     // Esta función se encarga de activar o desactivar la posibilidad de realizar la acción, dependiendo de 
     // si el objeto al que se intenta golpear se realiza con la herramienta correcta o no (se controla desde script (DigItem, GrabItem, ...)
-    public void SetAction(bool setAction)
+    public void SetAction(bool isActionPermitted)
     {
-        action = setAction;
-        //Debug.Log("Set Action -> " + action);
+        actionPermitted = isActionPermitted;
     }
 
     public void Action()
     {
-        if (currentTool.action == dig.action && action) Dig();
-        else if (currentTool.action == cut.action && action) Cut();
-        else if (currentTool.action == grab.action && action) Grab();
-        else if (currentTool.action == pointer.action && action) Point();
-        else if (currentTool.action == speak.action && action) Speak();
+        if (_currentTool.action == dig.action && actionPermitted) Dig();
+        else if (_currentTool.action == cut.action && actionPermitted) Cut();
+        else if (_currentTool.action == grab.action && actionPermitted) Grab();
+        else if (_currentTool.action == pointer.action && actionPermitted) Point();
+        else if (_currentTool.action == speak.action && actionPermitted) Speak();
     }
 
-    public void Point()
+    private void Point()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
         if (hit.collider)
         {
-            EventController.ChangeDialogPicEvent(CharImg);
-            EventController.PointObjectWrite(hit.collider.gameObject.name);
-            EventController.PointObjectSound(MusicController.ActionSound.pointSound);
-            action = false;
+            EventController.ChangeDialogPicEvent(charImg);
+            EventController.PointObjectWriteEvent(hit.collider.gameObject.name);
+            EventController.PointObjectSoundEvent(MusicController.ActionSound.PointSound);
+            actionPermitted = false;
         }
         
     }
-    public void Grab()
+
+    private void Grab()
     {
-        action = false;
-        Debug.Log("Grab Action!!");
+        actionPermitted = false;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
         
@@ -125,18 +120,16 @@ public class ActionController : MonoBehaviour
         {
             return;
         }
-        EventController.GrabObjectSound(MusicController.ActionSound.grabSound);
-        item = hit.collider.gameObject.GetComponent<GrabItem>().GetItem();
-        questController.GetItem(item);
+        EventController.GrabObjectSoundEvent(MusicController.ActionSound.GrabSound);
+        _item = hit.collider.gameObject.GetComponent<GrabItem>().GetItem();
+        QuestController.Instance.GetItem(_item);
         hit.collider.gameObject.SetActive(false);
-        if (item.respawnTime==0) return;
-        StartCoroutine(RespawnItem(hit.collider.gameObject, item.respawnTime));
+        if (_item.respawnTime==0) return;
+        StartCoroutine(RespawnItem(hit.collider.gameObject, _item.respawnTime));
     }
     IEnumerator RespawnItem(GameObject obj, float delay)
     {
-        // Esperar el tiempo especificado
         yield return new WaitForSeconds(delay);
-        // Llamar a la función con el parámetro
         Respawn(obj);
     }
     private void Respawn(GameObject itemToRespawn)
@@ -144,74 +137,89 @@ public class ActionController : MonoBehaviour
         itemToRespawn.SetActive(true);
     }
 
-    public void Speak()
+    private void Speak()
     {
-        action = false;// una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
-        
-        
-        /*Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
-        dist = clickPosition - playerPosition;
-        Debug.DrawLine(clickPosition,playerPosition,Color.red,5.0f);*/
-        
+        actionPermitted = false;// una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
+        if (_startQuest)
+        {
+            EventController.QuestIconDeactivateEvent(QuestController.Instance.GetCurrentQuest());
+            QuestController.Instance.StartQuest();
+            _startQuest = false;
+            return;
+        }
+        if (_completeQuest)
+        {
+            EventController.CompleteQuestEvent(QuestController.Instance.GetCurrentQuest());
+            _completeQuest=false;
+        }
+    }
+    public void SetStartQuest ()
+    {
+        _startQuest = true;
+    }
+    public void SetCompleteQuest()
+    {
+        _completeQuest=true;
     }
 
-    public void Dig()
+    private void Dig()
     {
-        action = false;// una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
-        movement.ToggleMovement();
+        actionPermitted = false;// una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
+        if (MovementController.Instance.isMoving)
+        {
+            MovementController.Instance.ToggleMovement();
+        }
         
         // Se calcula la diferencia de posición (dist) entre el clic y el Player. Se compara la magnitud de dist.x y dist.y para saber si el clic
         // está a la derecha, izquierda, arriba o abajo del Player.
         Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
-        dist = clickPosition - playerPosition;
+        _playerPosition = new Vector2(_playerTr.position.x, _playerTr.position.y);
+        _dist = clickPosition - _playerPosition;
         
-        if (Mathf.Abs(dist.x) > Mathf.Abs(dist.y))
+        if (Mathf.Abs(_dist.x) > Mathf.Abs(_dist.y))
         {
-            if (dist.x > 0)
-            { playerAnim.Play("Dig_right"); }
+            if (_dist.x > 0)
+            { _playerAnim.Play("Dig_right"); }
             else
-            { playerAnim.Play("Dig_left"); }
+            { _playerAnim.Play("Dig_left"); }
         }
         else
         {
-            if (dist.y > 0)
-            { playerAnim.Play("Dig_up"); }
+            if (_dist.y > 0)
+            { _playerAnim.Play("Dig_up"); }
             else
-            { playerAnim.Play("Dig_down"); }
+            { _playerAnim.Play("Dig_down"); }
         }
         
     }
-    
-    public void Cut()
+
+    private void Cut()
     {
-        action = false; // una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
-        movement.ToggleMovement();
+        actionPermitted = false; // una vez realizada se pone a false para que se compruebe de nuevo si puede realizar la acción siguiente
+        if (MovementController.Instance.isMoving)
+        {
+            MovementController.Instance.ToggleMovement();
+        }
         
         // Se calcula la diferencia de posición (dist) entre el clic y el Player. Se compara la magnitud de dist.x y dist.y para saber si el clic
         // está a la derecha, izquierda, arriba o abajo del Player.
         Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        playerPosition = new Vector2(playerTr.position.x, playerTr.position.y);
-        dist = clickPosition - playerPosition;
+        _playerPosition = new Vector2(_playerTr.position.x, _playerTr.position.y);
+        _dist = clickPosition - _playerPosition;
         
-        if (Mathf.Abs(dist.x) > Mathf.Abs(dist.y))
+        if (Mathf.Abs(_dist.x) > Mathf.Abs(_dist.y))
         {
-            if (dist.x > 0)
-            { playerAnim.Play("Cut_right"); }
+            if (_dist.x > 0)
+            { _playerAnim.Play("Cut_right"); }
             else
-            { playerAnim.Play("Cut_left"); }
+            { _playerAnim.Play("Cut_left"); }
         }
         else
         {
-            if (dist.y > 0)
-            { playerAnim.Play("Cut_up"); }
+            if (_dist.y > 0)
+            { _playerAnim.Play("Cut_up"); }
             else
-            { playerAnim.Play("Cut_down"); }
+            { _playerAnim.Play("Cut_down"); }
         }
-        
     }
-
-    
-
 }

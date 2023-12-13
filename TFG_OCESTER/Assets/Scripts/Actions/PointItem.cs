@@ -1,19 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PointItem : MonoBehaviour
 {
-    private ActionController selectedAction;
     [SerializeField] private ToolsSO pointerTool;
-    private string itemPointed;
+    private string _itemPointed;
 
-    
-    void Start()
+    private void Start()
     {
         EventController.OnFinishLevel += FinishLevel;
-        selectedAction = GameObject.FindObjectOfType<ActionController>();
     }
 
     private void OnDisable()
@@ -27,14 +21,14 @@ public class PointItem : MonoBehaviour
     }
     private void OnMouseOver()
     {
-        if (selectedAction.getTool().action != pointerTool.action)
+        if (ActionController.Instance.GetTool().action != pointerTool.action)
         {
             return;
         }
-        selectedAction.SetAction(true);
+        ActionController.Instance.SetAction(true);
     }
     private void OnMouseExit()
     {
-        selectedAction.SetAction(false);
+        ActionController.Instance.SetAction(false);
     }
 }

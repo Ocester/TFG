@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: Strawberry
   imgItem: {fileID: 710331379, guid: 01898a932e2464bfe9682f5fac473687, type: 3}
-  respawnTime: 5
+  respawnTime: 8
   collectTool: {fileID: 11400000, guid: 5d41db6bad2d1483a87f2f36dc10ad11, type: 2}
   itemType: 1

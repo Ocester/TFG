@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
+  m_Name: Quest5SO
+  m_EditorClassIdentifier: 
+  questName: Strawberry Jam
+  questId: 5
+  startingNPC: {fileID: 11400000, guid: 14094cab390c645d984cc2fe15211b6b, type: 2}
+  questText: Mermelada de fresa.
+  npcText:
+  - "Hola Trufo, \xBFsabes que voy a hacer una mermelada de fresa para el pastel?"
+  - Pero tengo un problema, me faltan todos los ingredientes.
+  - "\xBFPodr\xEDas buscarlos en tu recetario y recolectarlos por mi?"
+  finishedQuestText:
+  - Muchas gracias Trufo, voy a cocinar la mermelada cuanto antes.
+  allIngredientsQuestText:
+  - "\xA1Genial! Ya los tienes todos."
+  recipe: {fileID: 11400000, guid: 0536c37e4193b47b99742b96b2245c8c, type: 2}
+  started: 0
+  finished: 0
+  itemsColected: 0

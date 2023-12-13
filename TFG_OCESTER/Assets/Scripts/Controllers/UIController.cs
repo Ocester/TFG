@@ -1,15 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Button = UnityEngine.UIElements.Button;
 
 public class UIController : MonoBehaviour
 {
-    private GameObject[] toolBtns;
-    private GameObject uiToolsBar;
-    private Sprite currentToolSprite;
+    private GameObject[] _toolBtns;
+    private GameObject _uiToolsBar;
+    private Sprite _currentToolSprite;
+    public static UIController Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void OnEnable()
     {
         // Se suscribe al evento OnSelectedTool
@@ -24,12 +33,12 @@ public class UIController : MonoBehaviour
     void Start()
     {
         // Se buscan todos los botones de la tool bar
-        toolBtns = GameObject.FindGameObjectsWithTag("toolBtn");
-        uiToolsBar = GameObject.FindGameObjectWithTag("UI_ToolsBar");
+        _toolBtns = GameObject.FindGameObjectsWithTag("toolBtn");
+        _uiToolsBar = GameObject.FindGameObjectWithTag("UI_ToolsBar");
     }
     private void ToggleSelection(ToolsSO selectedTool)
     {
-        foreach (var tool in toolBtns)
+        foreach (var tool in _toolBtns)
         {
             if (tool.GetComponent<ToolSelection>().tool.action.ToString() != selectedTool.action.ToString())
             {
@@ -37,20 +46,18 @@ public class UIController : MonoBehaviour
             }
             else
             {
-                currentToolSprite = selectedTool.imgAction;
-                Cursor.SetCursor(currentToolSprite.texture, Vector2.zero, CursorMode.Auto);
+                _currentToolSprite = selectedTool.imgAction;
+                Cursor.SetCursor(_currentToolSprite.texture, Vector2.zero, CursorMode.Auto);
             }
         }
     }
-
     public void DeactivateTools()
     {
-        uiToolsBar.SetActive(false);
+        _uiToolsBar.SetActive(false);
     }
-    
     public void ActivateTools()
     {
-        uiToolsBar.SetActive(true);
+        _uiToolsBar.SetActive(true);
     }
 
 }

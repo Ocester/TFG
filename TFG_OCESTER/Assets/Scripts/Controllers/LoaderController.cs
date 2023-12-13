@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 public class LoaderController : MonoBehaviour
 {
     [SerializeField] private float loadTime;
-    public static LoaderController instance;
+    public static LoaderController Instance;
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -51,7 +51,7 @@ public class LoaderController : MonoBehaviour
         gameObject.GetComponent<Animator>().SetTrigger("End");
         yield return new WaitForSeconds(loadTime);
         gameObject.SetActive(false);
-    }
+        }
     
     private void OnDisable()
     {

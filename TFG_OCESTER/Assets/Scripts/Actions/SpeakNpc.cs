@@ -1,52 +1,37 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class SpeakNpc : MonoBehaviour
 {
     [SerializeField] private NpcSO npc;
-    [SerializeField]private ActionController selectedAction;
-    [SerializeField]private QuestController questController;
     [SerializeField]private bool insideArea = false;
     [SerializeField]private bool canBeSpoken= false;
     public List<QuestSO> quests;
     [SerializeField]private bool clickOnCorrectNpc;
     [SerializeField]private String clickedObject;
-    private QuestSO quest, currentQuest;
+    private QuestSO _quest, _currentQuest;
+    private float _maxDistance = 1.5f;
+    private Ray _ray;
+    private RaycastHit2D _hit;
+    private GameObject _player;
+    private Vector2 _playerPosition;
     
     private void Start()
     {
-        EventController.checkNextQuest += CheckNextQuest;
+        _player = GameObject.FindWithTag("Player");
+        EventController.CheckNextQuest += CheckNextQuest;
         EventController.OnFinishLevel += FinishLevel;
-        selectedAction = GameObject.FindObjectOfType<ActionController>();
-        questController = GameObject.FindObjectOfType<QuestController>();
-        quest = questController.GetCurrentQuest();
-        currentQuest = GetCurrentQuest(quest);
+        _quest = QuestController.Instance.GetCurrentQuest();
+        _currentQuest = GetCurrentQuest(_quest);
         CanBeSpokenNpc();
     }
     private void FinishLevel()
     {
         gameObject.SetActive(false);
     }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) {
-            
-            if (insideArea && canBeSpoken && checkCorrectNpc() && !currentQuest.started)
-            {
-                //Debug.Log("hablo con " + npc.nameNpc);
-                EventController.QuestIconDeactivateEvent(currentQuest);
-                questController.StartQuest();
-                
-            }
-            if (insideArea && canBeSpoken && checkCorrectNpc() && currentQuest.started && currentQuest.itemsColected)
-            {
-                EventController.CompleteQuestEvent(currentQuest);
-            }
-        }
-    }
+    
     private QuestSO GetCurrentQuest( QuestSO checkQuest)
     {
         foreach (var element in quests)
@@ -60,11 +45,11 @@ public class SpeakNpc : MonoBehaviour
     }
 
     // se verifica que clicamos encima del NPC y no fuera
-    private bool checkCorrectNpc()
+    private bool CheckCorrectNpc()
     {
         clickOnCorrectNpc = false;
-        Vector2 clickPositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(clickPositon, Vector2.zero);
+        Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero);
         if (hit.collider && hit.collider.CompareTag("npc"))
         {
             clickedObject = hit.collider.gameObject.GetComponent<SpeakNpc>().npc.nameNpc;
@@ -79,7 +64,7 @@ public class SpeakNpc : MonoBehaviour
     {
         canBeSpoken = false;
        // se controla que estamos en el NPC asignado a la quest
-        if (npc.nameNpc == quest.startingNPC.nameNpc)
+        if (npc.nameNpc == _quest.startingNPC.nameNpc)
         {
             canBeSpoken = true;
         }
@@ -97,9 +82,9 @@ public class SpeakNpc : MonoBehaviour
         }
         if (canBeDisabled)
         {
-            Debug.Log(npc.nameNpc+" NPC DESACTIVADO");
             canBeSpoken = false;
-            EventController.checkNextQuest -= CheckNextQuest;
+            EventController.CheckNextQuest -= CheckNextQuest;
+            EventController.OnFinishLevel -= FinishLevel;
         }
     }
 
@@ -113,7 +98,7 @@ public class SpeakNpc : MonoBehaviour
             if (element == checkQuest)
             {
                 canBeSpoken = true;
-                currentQuest = checkQuest;
+                _currentQuest = checkQuest;
             }
         }
         if (!canBeSpoken)
@@ -124,66 +109,65 @@ public class SpeakNpc : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (selectedAction.getTool().action != npc.interactionTool.action)
+        if (ActionController.Instance.GetTool().action != npc.interactionTool.action)
         {
-            Cursor.SetCursor(selectedAction.getTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(ActionController.Instance.GetTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
+            return;
         }
 
         if (!canBeSpoken)
         {
-            Cursor.SetCursor(selectedAction.getTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(ActionController.Instance.GetTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
+            return;
+        }
+        
+        IsInsideArea();
+
+        if (insideArea && canBeSpoken && CheckCorrectNpc() && !_currentQuest.started)
+        {
+            ActionController.Instance.SetStartQuest();
+        }
+        if (insideArea && canBeSpoken && CheckCorrectNpc() && _currentQuest.started && _currentQuest.itemsColected)
+        {
+            ActionController.Instance.SetCompleteQuest();
+        }
+        if (insideArea && DialogController.Instance._dialogFinished)
+        {
+            ActionController.Instance.SetAction(true);
         }
     }
+    private void IsInsideArea()
+    {
+        _playerPosition = new Vector2(_player.transform.position.x, _player.transform.position.y);
+        Vector2 rayOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _hit = Physics2D.Raycast(rayOrigin, Vector2.zero);
+        float dist = Vector2.Distance(_playerPosition, _hit.point);
 
+        if (_hit.collider != null)
+        {
+            if (dist <= _maxDistance)
+            {
+                // El raycast está dentro del rango máximo
+                insideArea = true;
+            }
+            else
+            {
+                // El raycast está fuera del rango máximo
+                insideArea = false;
+            }
+        }
+    }
     private void OnMouseExit()
     {
-        if (selectedAction.getTool().action != npc.interactionTool.action)
+        if (ActionController.Instance.GetTool().action != npc.interactionTool.action)
         {
-            Cursor.SetCursor(selectedAction.getTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(ActionController.Instance.GetTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
         }
         if (!canBeSpoken)
         {
-            Cursor.SetCursor(selectedAction.getTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(ActionController.Instance.GetTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        
-        if (selectedAction.getTool().action != npc.interactionTool.action)
-        {
-            selectedAction.SetAction(false);
-            return;
-        }
-        selectedAction.SetAction(true);
-        if (other.gameObject.CompareTag("grabArea"))
-        {
-            insideArea = true;
-            //Debug.Log(" Area para hacer clic!!!!");
-        };
-    }
-    
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (selectedAction.getTool().action != npc.interactionTool.action)
-        {
-            selectedAction.SetAction(false);
-            return;
-        }
-        selectedAction.SetAction(true);
-        if (other.gameObject.CompareTag("grabArea"))
-        {
-            insideArea = true;
-            //Debug.Log(" Stay Area para hacer clic!!!!");
-        };
-        
-    }
-    
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        //fuera de zona
         insideArea = false;
     }
-    
     
 }

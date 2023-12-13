@@ -161,7 +161,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1
-    functionName: ToggleMovementPlayer
+    functionName: ToggleMovement
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 4cff0cc662aa040c7923f8ecea5168ca, type: 3}
     floatParameter: 0

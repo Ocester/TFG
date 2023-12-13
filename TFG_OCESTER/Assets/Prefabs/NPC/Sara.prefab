@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5479470495719294196}
   - component: {fileID: 3791538170993543401}
   - component: {fileID: 5881029492664799561}
+  - component: {fileID: 1365077856835894990}
   m_Layer: 0
   m_Name: Sara
   m_TagString: npc
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_SortingOrder: 20
   m_Sprite: {fileID: -697826697, guid: c151cf6b359174a6e934d5ceb73322ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.16, y: 0.22}
@@ -218,9 +219,23 @@ MonoBehaviour:
   questController: {fileID: 0}
   insideArea: 0
   canBeSpoken: 0
-  quests: []
+  quests:
+  - {fileID: 11400000, guid: 3fabd668ba1f54d6884b5917a9e120d9, type: 2}
   clickOnCorrectNpc: 0
   clickedObject: 
+--- !u!114 &1365077856835894990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882294403802700176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1939d2aeb199c4f6994c05eca1980f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerTool: {fileID: 11400000, guid: 36ca1df48f8d74e2cb2ba8a91ff10e51, type: 2}
 --- !u!1001 &245385492566263629
 PrefabInstance:
   m_ObjectHideFlags: 0

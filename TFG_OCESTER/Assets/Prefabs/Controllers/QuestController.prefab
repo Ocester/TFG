@@ -48,8 +48,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 268c69053d4004120a02da3477906b2e, type: 2}
   - {fileID: 11400000, guid: 95e3ae36fa5de4c108853a07ee4e9c97, type: 2}
   - {fileID: 11400000, guid: a0c9a01e1017e4b30ac8bf0e1d5cff2c, type: 2}
+  - {fileID: 11400000, guid: 6a5f71cf7ddc74cf19b98c6e12f748d8, type: 2}
+  - {fileID: 11400000, guid: 3fabd668ba1f54d6884b5917a9e120d9, type: 2}
   - {fileID: 11400000, guid: 29188c3b882324a5ea47f6a64c0c44f0, type: 2}
+  - {fileID: 11400000, guid: 70c5c0027d48b46949ec7846560c927e, type: 2}
+  - {fileID: 11400000, guid: 942f0b1458b3f42009c025e4d6fc47f4, type: 2}
   currentQuestIndex: 0
   currentQuest: {fileID: 0}
   missionChart: {fileID: 0}
-  finalizarQuest: 0
+  allQuestsFinished: 0

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicController : MonoBehaviour
@@ -11,13 +8,14 @@ public class MusicController : MonoBehaviour
     [SerializeField] private AudioSource digSound;
     [SerializeField] private AudioSource cutSound;
     [SerializeField] private AudioSource grabSound;
-    
-    private static MusicController instance;
+    [SerializeField] private AudioSource endLevelSound;
+    public static MusicController Instance;
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -26,56 +24,62 @@ public class MusicController : MonoBehaviour
     }
     private void Start()
     {
-        EventController.pointObjectSound += PlayMusic;
-        EventController.dialogSound += PlayMusic;
-        EventController.digSound += PlayMusic;
-        EventController.grabSound += PlayMusic;
-        EventController.cutSound += PlayMusic;
-        PlayMusic(ActionSound.gameMusic);
+        EventController.PointObjectSound += PlayMusic;
+        EventController.DialogSound += PlayMusic;
+        EventController.DigSound += PlayMusic;
+        EventController.GrabSound += PlayMusic;
+        EventController.CutSound += PlayMusic;
+        EventController.FinishLevelSound += PlayMusic;
+        PlayMusic(ActionSound.GameMusic);
     }
 
     private void OnDisable()
     {
-        EventController.pointObjectSound -= PlayMusic;
-        EventController.dialogSound -= PlayMusic;
-        EventController.digSound -= PlayMusic;
-        EventController.grabSound -= PlayMusic;
-        EventController.cutSound -= PlayMusic;
+        EventController.PointObjectSound -= PlayMusic;
+        EventController.DialogSound -= PlayMusic;
+        EventController.DigSound -= PlayMusic;
+        EventController.GrabSound -= PlayMusic;
+        EventController.CutSound -= PlayMusic;
+        EventController.FinishLevelSound -= PlayMusic;
     }
 
     private void PlayMusic(ActionSound actionSound)
     {
         switch (actionSound)
         {
-            case ActionSound.gameMusic:
+            case ActionSound.GameMusic:
                 gameMusic.Play();
                 return;
-            case ActionSound.pointSound:
+            case ActionSound.PointSound:
                 pointSound.Play();
                 return;
-            case ActionSound.grabSound:
+            case ActionSound.GrabSound:
                 grabSound.Play();
                 return;
-            case ActionSound.dialogSound:
+            case ActionSound.DialogSound:
                 dialogSound.Play();
                 return;
-            case ActionSound.digSound:
+            case ActionSound.DigSound:
                 digSound.Play();
                 return;
-            case ActionSound.cutSound:
+            case ActionSound.CutSound:
                 cutSound.Play();
+                return;
+            case ActionSound.EndLevelSound:
+                gameMusic.Stop();
+                endLevelSound.Play();
                 return;
         }
     }
     
     public enum ActionSound
     {
-        gameMusic,
-        pointSound,
-        grabSound,
-        dialogSound,
-        digSound,
-        cutSound
-        
+        GameMusic,
+        PointSound,
+        GrabSound,
+        DialogSound,
+        DigSound,
+        CutSound,
+        EndLevelSound
     }
 }

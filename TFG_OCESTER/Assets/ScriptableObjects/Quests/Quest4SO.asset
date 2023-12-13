@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
+  m_Name: Quest4SO
+  m_EditorClassIdentifier: 
+  questName: Apple Cake
+  questId: 4
+  startingNPC: {fileID: 11400000, guid: 09519e9b5337c4a8cb4c50189f116ed3, type: 2}
+  questText: Tarta de Manzana.
+  npcText:
+  - "\xA1Hola Trufo! Estaba preguntando por ti. \xBFme puedes echar una mano?"
+  - Estoy cocinando una tarta de manzana, pero me faltan unos ingredientes.
+  - "\xBFpodr\xEDas recolectarlos?"
+  finishedQuestText:
+  - "Gracias por tu ayuda. Ahora podr\xE9 hacer la mejor tarta de manzana del festival."
+  allIngredientsQuestText:
+  - "\xA1Fenomenal! Ya tienes todos los ingredientes."
+  recipe: {fileID: 11400000, guid: 70b63f983da8b4c5ba8e46cf13a82930, type: 2}
+  started: 0
+  finished: 0
+  itemsColected: 0

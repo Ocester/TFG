@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1302158089405422000}
   - component: {fileID: 6224902840825374016}
   - component: {fileID: 2245565674256573593}
+  - component: {fileID: 3089283504035771215}
   m_Layer: 0
   m_Name: Teddy
   m_TagString: npc
@@ -217,6 +218,20 @@ MonoBehaviour:
   insideArea: 0
   canBeSpoken: 0
   quests:
+  - {fileID: 11400000, guid: 6a5f71cf7ddc74cf19b98c6e12f748d8, type: 2}
   - {fileID: 11400000, guid: 29188c3b882324a5ea47f6a64c0c44f0, type: 2}
   clickOnCorrectNpc: 0
   clickedObject: 
+--- !u!114 &3089283504035771215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5847690446451816496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1939d2aeb199c4f6994c05eca1980f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerTool: {fileID: 11400000, guid: 36ca1df48f8d74e2cb2ba8a91ff10e51, type: 2}

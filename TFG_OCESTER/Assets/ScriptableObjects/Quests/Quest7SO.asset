@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
+  m_Name: Quest7SO
+  m_EditorClassIdentifier: 
+  questName: Ending
+  questId: 7
+  startingNPC: {fileID: 11400000, guid: 61ee0538331bd4293b7d38156af844a7, type: 2}
+  questText: Quest despedida final.
+  npcText:
+  - '!!Muchas gracias por ayudarmos!!'
+  - "Los aldeanos podr\xE1n participar en el festival."
+  - Y todo gracias a tu ayuda!!
+  finishedQuestText: []
+  allIngredientsQuestText: []
+  recipe: {fileID: 0}
+  started: 0
+  finished: 0
+  itemsColected: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7871538289599370811}
   - component: {fileID: 6900659994233068735}
   - component: {fileID: 2281867347399154307}
+  - component: {fileID: 4461996265961863819}
   m_Layer: 0
   m_Name: Todd
   m_TagString: npc
@@ -212,14 +213,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30d54d10d09a4d1a935393fd4e85c8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 11400000, guid: 14094cab390c645d984cc2fe15211b6b, type: 2}
+  npc: {fileID: 11400000, guid: 9597196e7025c4108a2192e05ce23d53, type: 2}
   selectedAction: {fileID: 0}
   questController: {fileID: 0}
   insideArea: 0
   canBeSpoken: 0
-  quests: []
+  quests:
+  - {fileID: 11400000, guid: 70c5c0027d48b46949ec7846560c927e, type: 2}
   clickOnCorrectNpc: 0
   clickedObject: 
+--- !u!114 &4461996265961863819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2735374581856542185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1939d2aeb199c4f6994c05eca1980f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerTool: {fileID: 11400000, guid: 36ca1df48f8d74e2cb2ba8a91ff10e51, type: 2}
 --- !u!1001 &5233456286782873227
 PrefabInstance:
   m_ObjectHideFlags: 0

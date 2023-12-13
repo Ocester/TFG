@@ -1,19 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class CutItem : MonoBehaviour
 {
     [SerializeField] private ItemCollectableSO item;
-    private ActionController selectedAction;
-    private QuestController questController;
 
-    void Start()
+    private void Start()
     {
         EventController.OnFinishLevel += FinishLevel;
-        selectedAction = GameObject.FindObjectOfType<ActionController>();
     }
     private void FinishLevel()
     {
@@ -22,34 +15,34 @@ public class CutItem : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (selectedAction.getTool().action != item.collectTool.action)
+        if (ActionController.Instance.GetTool().action != item.collectTool.action)
         {
-            Cursor.SetCursor(selectedAction.getTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(ActionController.Instance.GetTool().imgActionDisabled.texture, Vector2.zero, CursorMode.Auto);
         }
     }
 
     private void OnMouseExit()
     {
         
-        if (selectedAction.getTool().action != item.collectTool.action )   
+        if (ActionController.Instance.GetTool().action != item.collectTool.action )   
         {
-            Cursor.SetCursor(selectedAction.getTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(ActionController.Instance.GetTool().imgAction.texture, Vector2.zero, CursorMode.Auto);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         
-        if (selectedAction.getTool().action != item.collectTool.action)
+        if (ActionController.Instance.GetTool().action != item.collectTool.action)
         {
-            selectedAction.SetAction(false);
+            ActionController.Instance.SetAction(false);
             return;
         }
-        selectedAction.SetAction(true);
+        ActionController.Instance.SetAction(true);
         if (other.gameObject.name == "UpHit" || other.gameObject.name == "DownHit" || other.gameObject.name == "RightHit" || other.gameObject.name == "LeftHit")
         {
-            EventController.CutObjectSound(MusicController.ActionSound.cutSound);
-            Debug.Log("CUT HIT!!");
+            EventController.CutObjectSoundEvent(MusicController.ActionSound.CutSound);
+            ActionController.Instance.SetAction(false);
             gameObject.SetActive(false);
             if (item.respawnTime != 0)
             {
@@ -61,17 +54,15 @@ public class CutItem : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
          
-        if (selectedAction.getTool().action != item.collectTool.action)
+        if (ActionController.Instance.GetTool().action != item.collectTool.action)
         {
             return;
         }
-        selectedAction.SetAction(true);
+        ActionController.Instance.SetAction(true);
     }
 
     private void Activate()
     {
         gameObject.SetActive(true);
     }
-    
-    
 }

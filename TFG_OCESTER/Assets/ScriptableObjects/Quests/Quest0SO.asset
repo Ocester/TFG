@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
   m_Name: Quest0SO
   m_EditorClassIdentifier: 
-  questName: My recipe book
+  questName: Libro de recetas
   questId: 0
   startingNPC: {fileID: 11400000, guid: 61ee0538331bd4293b7d38156af844a7, type: 2}
   questText: Libro de recetas
   npcText:
   - Hola Trufo, menos mal que te he encontrado, necesito que me ayudes.
   - "Ma\xF1ana es el festival de cocina de Kaio, y tengo que preparar un plato."
-  - Necesito que encuentres mi recetario para poder cocinar el mejor plato!!
-  - "Creo que lo vi por \xFAltima vez dentro de un cofre. \xBFpuedes encontrarlo?"
+  - Necesito que encuentres un recetario para poder cocinar el mejor plato!
+  - "Creo que lo vieron por \xFAltima vez guardado dentro de un cofre. \xBFpuedes
+    encontrarlo?"
   finishedQuestText:
-  - "\xA1\xA1Muchas gracias por encontralo!!"
+  - "\xA1Muchas gracias por encontralo! Ahora podremos cocinar las mejores recetas."
   allIngredientsQuestText:
   - "\xA1Ya lo has encontrado!"
   recipe: {fileID: 11400000, guid: c8b78b0f893ce4bcb9f3d7c856593742, type: 2}
   started: 1
-  finished: 1
-  itemsColected: 1
+  finished: 0
+  itemsColected: 0

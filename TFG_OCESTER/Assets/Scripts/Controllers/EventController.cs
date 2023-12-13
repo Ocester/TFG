@@ -1,36 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
-using TMPro;
 
 public class EventController : MonoBehaviour
 {
     public static Action<ToolsSO> OnSelectedTool;
-    public static Action<QuestSO> activateIconQuest;
-    public static Action<QuestSO> deactivateIconQuest;
-    public static Action<QuestSO> activateItem;
-    public static Action<QuestSO> completeQuest;
-    public static Action<QuestSO> checkNextQuest;
-    public static Action<QuestSO> dialogTextWrite;
-    public static Action<string> pointObjectWrite;
-    public static Action<QuestSO> missionUpdateText;
-    public static Action missionTextClear;
-    public static Action<Sprite> changeDialogPic;
+    public static Action<QuestSO> ActivateIconQuest;
+    public static Action<QuestSO> DeactivateIconQuest;
+    public static Action<QuestSO> ActivateItem;
+    public static Action<QuestSO> CompleteQuest;
+    public static Action<QuestSO> CheckNextQuest;
+    public static Action<QuestSO> DialogTextWrite;
+    public static Action<string> PointObjectWrite;
+    public static Action<QuestSO> MissionUpdateText;
+    public static Action MissionTextClear;
+    public static Action<Sprite> ChangeDialogPic;
     public static Action OnFinishLevel;
-    public static Action<MusicController.ActionSound> pointObjectSound;
-    public static Action<MusicController.ActionSound> grabSound;
-    public static Action<MusicController.ActionSound> dialogSound;
-    public static Action<MusicController.ActionSound> digSound;
-    public static Action<MusicController.ActionSound> cutSound;
+    public static Action<MusicController.ActionSound> PointObjectSound;
+    public static Action<MusicController.ActionSound> GrabSound;
+    public static Action<MusicController.ActionSound> DialogSound;
+    public static Action<MusicController.ActionSound> DigSound;
+    public static Action<MusicController.ActionSound> CutSound;
+    public static Action<MusicController.ActionSound> FinishLevelSound;
     
-    private static EventController instance;
+    public static EventController Instance;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -43,67 +42,70 @@ public class EventController : MonoBehaviour
     }
     public static void ActivateItemEvent(QuestSO quest)
     {
-        activateItem?.Invoke(quest);
+        ActivateItem?.Invoke(quest);
     }
     public static void QuestIconActivateEvent(QuestSO questInWaiting)
     {
-        activateIconQuest?.Invoke(questInWaiting);
+        ActivateIconQuest?.Invoke(questInWaiting);
     }
     public static void QuestIconDeactivateEvent(QuestSO quest)
     {
-        deactivateIconQuest?.Invoke(quest);
+        DeactivateIconQuest?.Invoke(quest);
     }
     public static void CompleteQuestEvent(QuestSO quest)
     {
-        completeQuest?.Invoke(quest);
+        CompleteQuest?.Invoke(quest);
     }
     public static void CheckNextQuestEvent(QuestSO quest)
     {
-        checkNextQuest?.Invoke(quest);
+        CheckNextQuest?.Invoke(quest);
     }
     public static void WriteDialogTextEvent(QuestSO questText)
     {
-        dialogTextWrite?.Invoke(questText);
+        DialogTextWrite?.Invoke(questText);
     }
-    public static void PointObjectWrite(string text)
+    public static void PointObjectWriteEvent(string text)
     {
-        pointObjectWrite?.Invoke(text);
+        PointObjectWrite?.Invoke(text);
     }
     public static void WriteMissionUpdateEvent(QuestSO quest)
     {
-        missionUpdateText?.Invoke(quest);
+        MissionUpdateText?.Invoke(quest);
     }
     public static void ClearMissionTextEvent()
     {
-        missionTextClear?.Invoke();
+        MissionTextClear?.Invoke();
     }
     public static void ChangeDialogPicEvent(Sprite charImg)
     {
-        changeDialogPic?.Invoke(charImg);
+        ChangeDialogPic?.Invoke(charImg);
     }
     public static void FinishLevelEvent()
     {
         OnFinishLevel?.Invoke();
     }
-    public static void PointObjectSound(MusicController.ActionSound soundType)
+    public static void PointObjectSoundEvent(MusicController.ActionSound soundType)
     {
-        pointObjectSound?.Invoke(soundType);
+        PointObjectSound?.Invoke(soundType);
     }
-    public static void DialogSound(MusicController.ActionSound soundType)
+    public static void DialogSoundEvent(MusicController.ActionSound soundType)
     {
-        dialogSound?.Invoke(soundType);
+        DialogSound?.Invoke(soundType);
     }
-    public static void DigObjectSound(MusicController.ActionSound soundType)
+    public static void DigObjectSoundEvent(MusicController.ActionSound soundType)
     {
-        digSound?.Invoke(soundType);
+        DigSound?.Invoke(soundType);
     }
-    public static void GrabObjectSound(MusicController.ActionSound soundType)
+    public static void GrabObjectSoundEvent(MusicController.ActionSound soundType)
     {
-        grabSound?.Invoke(soundType);
+        GrabSound?.Invoke(soundType);
     }
-    public static void CutObjectSound(MusicController.ActionSound soundType)
+    public static void CutObjectSoundEvent(MusicController.ActionSound soundType)
     {
-        cutSound?.Invoke(soundType);
+        CutSound?.Invoke(soundType);
     }
-    
+    public static void FinishLevelSoundEvent(MusicController.ActionSound soundType)
+    {
+        FinishLevelSound?.Invoke(soundType);
+    }
 }
