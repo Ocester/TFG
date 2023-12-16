@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3636269562169760062}
   - component: {fileID: 4643839682459320128}
   - component: {fileID: 5500742678486878351}
+  - component: {fileID: 3420984684843957001}
   m_Layer: 0
   m_Name: chickenBrown
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1470106839, guid: 2846505682abd4645a797a7a770697eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -152,3 +153,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6875, y: 0.8125}
   m_EdgeRadius: 0
+--- !u!114 &3420984684843957001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583923343796933979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1939d2aeb199c4f6994c05eca1980f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerTool: {fileID: 11400000, guid: 36ca1df48f8d74e2cb2ba8a91ff10e51, type: 2}

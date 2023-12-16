@@ -79,7 +79,7 @@ public class IconController : MonoBehaviour
         {
             EventController.ActivateIconQuest -= ActivateIcon;
             EventController.DeactivateIconQuest -= DeactivateIcon;
-            EventController.DeactivateIconQuest -= EndIconAnim;
+            EventController.CompleteQuest -= EndIconAnim;
             Destroy(gameObject);
         }
     }
