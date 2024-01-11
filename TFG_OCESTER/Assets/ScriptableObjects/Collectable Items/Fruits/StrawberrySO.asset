@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StrawberrySO
   m_EditorClassIdentifier: 
   nameItem: Strawberry
-  imgItem: {fileID: 710331379, guid: 01898a932e2464bfe9682f5fac473687, type: 3}
+  imgItem: {fileID: -641500561, guid: 91d038ce106af48b887b66288963382a, type: 3}
   respawnTime: 8
   collectTool: {fileID: 11400000, guid: 5d41db6bad2d1483a87f2f36dc10ad11, type: 2}
   itemType: 1

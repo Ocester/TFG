@@ -19,14 +19,13 @@ MonoBehaviour:
   npcText:
   - Hola Trufo, menos mal que te he encontrado, necesito que me ayudes.
   - "Ma\xF1ana es el festival de cocina de Kaio, y tengo que preparar un plato."
-  - Necesito que encuentres un recetario para poder cocinar el mejor plato!
-  - "Creo que lo vieron por \xFAltima vez guardado dentro de un cofre. \xBFpuedes
-    encontrarlo?"
+  - Necesito que encuentres un recetario para poder cocinar el mejor plato.
+  - "Creo que lo vieron por \xFAltima vez guardado dentro de un cofre. Puedes encontrarlo?"
   finishedQuestText:
-  - "\xA1Muchas gracias por encontralo! Ahora podremos cocinar las mejores recetas."
+  - "\xA1Muchas gracias por encontralo\xA1 Ahora podremos cocinar las mejores recetas."
   allIngredientsQuestText:
   - "\xA1Ya lo has encontrado!"
   recipe: {fileID: 11400000, guid: c8b78b0f893ce4bcb9f3d7c856593742, type: 2}
   started: 1
-  finished: 0
-  itemsColected: 0
+  finished: 1
+  itemsColected: 1

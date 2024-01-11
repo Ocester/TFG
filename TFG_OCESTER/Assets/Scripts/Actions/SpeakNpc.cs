@@ -17,16 +17,33 @@ public class SpeakNpc : MonoBehaviour
     private RaycastHit2D _hit;
     private GameObject _player;
     private Vector2 _playerPosition;
+    private Vector3 _initialScale;
     
     private void Start()
     {
         _player = GameObject.FindWithTag("Player");
         EventController.CheckNextQuest += CheckNextQuest;
         EventController.OnFinishLevel += FinishLevel;
+        EventController.OnChangeAccessibility += ChangeSize;
         _quest = QuestController.Instance.GetCurrentQuest();
         _currentQuest = GetCurrentQuest(_quest);
         CanBeSpokenNpc();
+        _initialScale = gameObject.transform.localScale;
     }
+
+    private void ChangeSize(UIController.UIElementsSize newSize)
+    {
+        switch (newSize)
+        {
+            case UIController.UIElementsSize.S:
+                gameObject.transform.localScale = _initialScale;
+                break;
+            case UIController.UIElementsSize.M:
+                gameObject.transform.localScale = new Vector3(_initialScale.x * 2, _initialScale.y * 2, 0);
+                break;
+        }
+    }
+
     private void FinishLevel()
     {
         gameObject.SetActive(false);
@@ -85,6 +102,7 @@ public class SpeakNpc : MonoBehaviour
             canBeSpoken = false;
             EventController.CheckNextQuest -= CheckNextQuest;
             EventController.OnFinishLevel -= FinishLevel;
+            EventController.OnChangeAccessibility -= ChangeSize;
         }
     }
 

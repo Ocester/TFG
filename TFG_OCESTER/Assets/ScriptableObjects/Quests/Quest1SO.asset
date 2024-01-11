@@ -18,13 +18,13 @@ MonoBehaviour:
   questText: Tarta de queso
   npcText:
   - Hola! tengo que pedirte otro favor, necesito hacer una tarta de queso.
-  - "\xBFpodr\xEDas mirar los ingredientes del recetario? Est\xE1 en Ingl\xE9s y
-    no lo entiendo."
+  - "podr\xEDas mirar los ingredientes del recetario? Est\xE1 en Ingl\xE9s y no lo
+    entiendo."
   finishedQuestText:
-  - "\xA1Genial! ya puedo comenzar a preparar la tarta de queso."
+  - "\xA1Genial\xA1 ya puedo comenzar a preparar la tarta de queso."
   allIngredientsQuestText:
   - "\xA1Ya tienes todos los ingredientes!"
   recipe: {fileID: 11400000, guid: edb37d248a06c45e89f72e5d51a51173, type: 2}
-  started: 0
-  finished: 0
-  itemsColected: 0
+  started: 1
+  finished: 1
+  itemsColected: 1

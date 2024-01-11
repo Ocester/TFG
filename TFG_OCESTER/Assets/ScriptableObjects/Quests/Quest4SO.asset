@@ -12,19 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
   m_Name: Quest4SO
   m_EditorClassIdentifier: 
-  questName: Apple Cake
+  questName: Apple Pie
   questId: 4
-  startingNPC: {fileID: 11400000, guid: 09519e9b5337c4a8cb4c50189f116ed3, type: 2}
+  startingNPC: {fileID: 11400000, guid: 7e47997735ac34565a75b4f0ce306bc7, type: 2}
   questText: Tarta de Manzana.
   npcText:
-  - "\xA1Hola Trufo! Estaba preguntando por ti. \xBFme puedes echar una mano?"
+  - Hola Trufo, Estaba preguntando por ti. Me puedes echar una mano?
   - Estoy cocinando una tarta de manzana, pero me faltan unos ingredientes.
-  - "\xBFpodr\xEDas recolectarlos?"
+  - "Podr\xEDas recolectarlos?"
   finishedQuestText:
-  - "Gracias por tu ayuda. Ahora podr\xE9 hacer la mejor tarta de manzana del festival."
+  - "\xA1Gracias por tu ayuda\xA1 Ahora podr\xE9 hacer la mejor tarta de manzana
+    del festival."
   allIngredientsQuestText:
-  - "\xA1Fenomenal! Ya tienes todos los ingredientes."
+  - "\xA1Fenomenal\xA1 Ya tienes todos los ingredientes."
   recipe: {fileID: 11400000, guid: 70b63f983da8b4c5ba8e46cf13a82930, type: 2}
-  started: 0
-  finished: 0
-  itemsColected: 0
+  started: 1
+  finished: 1
+  itemsColected: 1

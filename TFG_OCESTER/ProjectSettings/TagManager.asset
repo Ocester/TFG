@@ -8,6 +8,7 @@ TagManager:
   - npc
   - grabArea
   - UI_ToolsBar
+  - UI_ToolsBarM
   layers:
   - Default
   - TransparentFX

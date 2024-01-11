@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
+  m_Name: Quest9SO
+  m_EditorClassIdentifier: 
+  questName: Strawberry Jam
+  questId: 7
+  startingNPC: {fileID: 11400000, guid: 9597196e7025c4108a2192e05ce23d53, type: 2}
+  questText: Strawberry Jam
+  npcText: []
+  finishedQuestText: []
+  allIngredientsQuestText: []
+  recipe: {fileID: 11400000, guid: 0536c37e4193b47b99742b96b2245c8c, type: 2}
+  started: 0
+  finished: 0
+  itemsColected: 0

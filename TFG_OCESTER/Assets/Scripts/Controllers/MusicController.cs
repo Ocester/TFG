@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class MusicController : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class MusicController : MonoBehaviour
     [SerializeField] private AudioSource cutSound;
     [SerializeField] private AudioSource grabSound;
     [SerializeField] private AudioSource endLevelSound;
+    [Header("Music Volume")]
+    [SerializeField] private Slider soundLevelSlider;
     public static MusicController Instance;
     private void Awake()
     {
@@ -24,26 +28,34 @@ public class MusicController : MonoBehaviour
     }
     private void Start()
     {
-        EventController.PointObjectSound += PlayMusic;
-        EventController.DialogSound += PlayMusic;
-        EventController.DigSound += PlayMusic;
-        EventController.GrabSound += PlayMusic;
-        EventController.CutSound += PlayMusic;
-        EventController.FinishLevelSound += PlayMusic;
-        PlayMusic(ActionSound.GameMusic);
+        EventController.PointObjectSound += PlaySound;
+        EventController.DialogSound += PlaySound;
+        EventController.DigSound += PlaySound;
+        EventController.GrabSound += PlaySound;
+        EventController.CutSound += PlaySound;
+        EventController.FinishLevelSound += PlaySound;
+        gameMusic.volume = 0.5f;
+        PlaySound(ActionSound.GameMusic);
+        soundLevelSlider.value = gameMusic.volume;
+        soundLevelSlider.onValueChanged.AddListener(ChangeMusicVolume);
     }
 
     private void OnDisable()
     {
-        EventController.PointObjectSound -= PlayMusic;
-        EventController.DialogSound -= PlayMusic;
-        EventController.DigSound -= PlayMusic;
-        EventController.GrabSound -= PlayMusic;
-        EventController.CutSound -= PlayMusic;
-        EventController.FinishLevelSound -= PlayMusic;
+        EventController.PointObjectSound -= PlaySound;
+        EventController.DialogSound -= PlaySound;
+        EventController.DigSound -= PlaySound;
+        EventController.GrabSound -= PlaySound;
+        EventController.CutSound -= PlaySound;
+        EventController.FinishLevelSound -= PlaySound;
     }
 
-    private void PlayMusic(ActionSound actionSound)
+    private void ChangeMusicVolume(float volume)
+    {
+        gameMusic.volume = volume;
+    } 
+
+    private void PlaySound(ActionSound actionSound)
     {
         switch (actionSound)
         {

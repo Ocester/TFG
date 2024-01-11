@@ -6,14 +6,17 @@ public class DialogController : MonoBehaviour
 {
     [SerializeField] private GameObject dialogObjet;
     [SerializeField] private GameObject charSpeakImg;
+    [SerializeField] private GameObject charSpeakNameText;
     [SerializeField] private GameObject arrowSprite;
     [SerializeField] private TextMeshProUGUI _textUI;
+    [SerializeField]private NpcSO player;
     private string [] _dialogText;
     private int _lineIndex;
     private bool _dialogStarted;
     public bool _dialogFinished;
     private bool _lineFinished;
     private bool _pointerTextWritten;
+   
     
     public static DialogController Instance;
     private void Awake()
@@ -31,6 +34,7 @@ public class DialogController : MonoBehaviour
     private void Start()
     {
         EventController.DialogTextWrite += WriteText;
+        EventController.DialogTextWrite += ChangeCharSpeakText;
         EventController.PointObjectWrite += WritePointerText;
         EventController.ChangeDialogPic += ChangeCharacterPic;
         _textUI.enabled = false;
@@ -43,6 +47,7 @@ public class DialogController : MonoBehaviour
     private void OnDisable()
     {
         EventController.DialogTextWrite -= WriteText;
+        EventController.DialogTextWrite -= ChangeCharSpeakText;
         EventController.PointObjectWrite -= WritePointerText;
         EventController.ChangeDialogPic -= ChangeCharacterPic;
     }
@@ -81,6 +86,7 @@ public class DialogController : MonoBehaviour
         _textUI.enabled = true;
         _textUI.text = txt;
         _pointerTextWritten = true;
+        charSpeakNameText.GetComponent<TextMeshProUGUI>().text = player.nameNpc;
     }
     
     private void NextLine()
@@ -148,5 +154,10 @@ public class DialogController : MonoBehaviour
         dialogObjet.GetComponent<SpriteRenderer>().enabled=true;
         _textUI.enabled = true;
         StartCoroutine(WriteLine());
+    }
+
+    private void ChangeCharSpeakText(QuestSO quest)
+    {
+        charSpeakNameText.GetComponent<TextMeshProUGUI>().text = quest.startingNPC.nameNpc;
     }
 }

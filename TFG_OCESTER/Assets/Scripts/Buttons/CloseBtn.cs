@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-
 public class CloseBtn : MonoBehaviour
 {
     [SerializeField] private GameObject informationPanel;
@@ -12,9 +11,6 @@ public class CloseBtn : MonoBehaviour
     private void CloseSettings()
     {
         informationPanel.SetActive(false);
-        if (MovementController.Instance)
-        {
-            MovementController.Instance.isMoving = true;
-        }
+        MovementController.Instance.isMoving=true;
     }
 }

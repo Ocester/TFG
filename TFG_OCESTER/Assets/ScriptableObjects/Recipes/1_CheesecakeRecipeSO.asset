@@ -21,3 +21,6 @@ MonoBehaviour:
   - requiredItem: {fileID: 11400000, guid: 2feae9506841e4fee8eb3c4c483d276a, type: 2}
     quantity: 3
     collectedQuantity: 0
+  - requiredItem: {fileID: 11400000, guid: a40b6798c68a4463fa483949446b335d, type: 2}
+    quantity: 3
+    collectedQuantity: 0

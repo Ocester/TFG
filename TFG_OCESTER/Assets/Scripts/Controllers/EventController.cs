@@ -21,6 +21,8 @@ public class EventController : MonoBehaviour
     public static Action<MusicController.ActionSound> DigSound;
     public static Action<MusicController.ActionSound> CutSound;
     public static Action<MusicController.ActionSound> FinishLevelSound;
+    public static Action<UIController.UIElementsSize> OnChangeAccessibility;
+    public static Action<UIController.UIColorblindMode> OnChangeColorblindMode;
     
     public static EventController Instance;
 
@@ -36,6 +38,8 @@ public class EventController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    
     public static void SelectedToolEvent(ToolsSO tool)
     {
         OnSelectedTool?.Invoke(tool);
@@ -107,5 +111,13 @@ public class EventController : MonoBehaviour
     public static void FinishLevelSoundEvent(MusicController.ActionSound soundType)
     {
         FinishLevelSound?.Invoke(soundType);
+    }
+    public static void SelectedChangeAccessibilityEvent(UIController.UIElementsSize size)
+    {
+        OnChangeAccessibility?.Invoke(size);
+    }
+    public static void SelectedColorblindMode(UIController.UIColorblindMode newColorblindMode)
+    {
+        OnChangeColorblindMode?.Invoke(newColorblindMode);
     }
 }

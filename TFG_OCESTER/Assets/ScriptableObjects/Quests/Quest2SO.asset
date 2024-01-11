@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
   m_Name: Quest2SO
   m_EditorClassIdentifier: 
-  questName: Carrot Cake
+  questName: Xiang Bing
   questId: 2
-  startingNPC: {fileID: 11400000, guid: 6581251cc423c4d008d30e879039b8fc, type: 2}
-  questText: "Recolecta los ingredientes de la tarta de zanahoria\t"
+  startingNPC: {fileID: 11400000, guid: 09519e9b5337c4a8cb4c50189f116ed3, type: 2}
+  questText: Recolecta los ingredientes del Xiang Bing
   npcText:
   - "\xA1Hola! menos mal que te encuentro, \xA1necesito ayuda!"
-  - "Tengo que  hacer una tarta de zanahora, pero no s\xE9 los ingredientes necesarios."
-  - "\xBFPodr\xEDas consultarlo en t\xFA recetario? Necesito que los encuentres."
+  - "Quiero elaborar un Xiang Bing, pero no s\xE9 los ingredientes necesarios."
+  - "Podr\xEDas consultarlo en t\xFA recetario? Necesito que los encuentres."
   finishedQuestText:
-  - "\xA1Muchas gracias! voy a preparar la mejor tarta de zanahora del festival."
+  - "\xA1Muchas gracias\xA1 voy a preparar la mejor tarta de zanahora del festival."
   allIngredientsQuestText:
   - "\xA1muy bien ya los tienes todos!"
-  recipe: {fileID: 11400000, guid: 081b8913e0e514077980f3d93cb989cd, type: 2}
-  started: 0
-  finished: 0
-  itemsColected: 0
+  recipe: {fileID: 11400000, guid: e74e6a1d255aa46359e8bf8aa0367229, type: 2}
+  started: 1
+  finished: 1
+  itemsColected: 1

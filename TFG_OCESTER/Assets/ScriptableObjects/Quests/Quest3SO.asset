@@ -22,10 +22,10 @@ MonoBehaviour:
   - Pero me faltan ingredientes que desconozco.
   - "Quiz\xE1s en el recetario aparezcan y me puedas ayudar."
   finishedQuestText:
-  - Muchas gracias Trufo, voy a hacer el mejor pastel de frutas del festival!
+  - "\xA1Muchas gracias Trufo\xA1 voy a hacer el mejor pastel de frutas del festival."
   allIngredientsQuestText:
   - Perfecto! ya los tienes todos.
   recipe: {fileID: 11400000, guid: 0e17f3b7e46924cf885fa686303ed52b, type: 2}
-  started: 0
-  finished: 0
-  itemsColected: 0
+  started: 1
+  finished: 1
+  itemsColected: 1

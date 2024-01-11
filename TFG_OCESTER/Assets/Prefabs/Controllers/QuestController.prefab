@@ -52,8 +52,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3fabd668ba1f54d6884b5917a9e120d9, type: 2}
   - {fileID: 11400000, guid: 29188c3b882324a5ea47f6a64c0c44f0, type: 2}
   - {fileID: 11400000, guid: 70c5c0027d48b46949ec7846560c927e, type: 2}
-  - {fileID: 11400000, guid: 942f0b1458b3f42009c025e4d6fc47f4, type: 2}
+  - {fileID: 11400000, guid: 2cb1311ec56994d41bc5a8f5c3adb05a, type: 2}
   currentQuestIndex: 0
   currentQuest: {fileID: 0}
   missionChart: {fileID: 0}
+  missionDetails: {fileID: 0}
+  greenCheck: {fileID: 0}
+  itemImg: {fileID: 0}
   allQuestsFinished: 0

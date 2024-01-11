@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GrabItem : MonoBehaviour
@@ -11,13 +12,38 @@ public class GrabItem : MonoBehaviour
     private RaycastHit2D _hit;
     private GameObject _player;
     private Vector2 _playerPosition;
+    private Vector3 initialItemSize;
 
     private void Start()
     {
         EventController.ActivateItem += CheckNextQuest;
         EventController.OnFinishLevel += FinishLevel;
+        EventController.OnChangeAccessibility+=ChangeIconSize;
         _player = GameObject.FindWithTag("Player");
+        initialItemSize = transform.localScale;
     }
+
+    private void OnDisable()
+    {
+        EventController.ActivateItem -= CheckNextQuest;
+        EventController.OnFinishLevel -= FinishLevel;
+        EventController.OnChangeAccessibility-=ChangeIconSize;
+    }
+    
+    private void ChangeIconSize(UIController.UIElementsSize newSize)
+    {
+        switch (newSize)
+        {
+            case UIController.UIElementsSize.S:
+                gameObject.transform.localScale = initialItemSize;
+                gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                break;
+            case UIController.UIElementsSize.M:
+                gameObject.transform.localScale = new Vector3(initialItemSize.x * 2, initialItemSize.y * 2, 0);
+                break;
+        }
+    }
+
     private void FinishLevel()
     {
         gameObject.SetActive(false);
@@ -48,6 +74,7 @@ public class GrabItem : MonoBehaviour
     private void CheckNextQuest(QuestSO checkQuest)
     {
         IsCurrentQuestItem(checkQuest);
+        ChangeIconSize(UIController.Instance.currentUIElementsSize);
     }
 
     private void OnMouseOver()

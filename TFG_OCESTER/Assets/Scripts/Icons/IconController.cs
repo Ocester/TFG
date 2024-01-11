@@ -8,18 +8,36 @@ public class IconController : MonoBehaviour
     private int _currentQuestIndex=0; // index de las quests que puede ofrecer el NPC
     private QuestSO _quest, _iconQuest;
     private float _scale;
+    private Vector3 initialItemSize;
   
     void Start()
     {
         EventController.ActivateIconQuest += ActivateIcon;
         EventController.DeactivateIconQuest += DeactivateIcon;
         EventController.CompleteQuest += EndIconAnim;
+        EventController.OnChangeAccessibility+=ChangeIconSize;
         iconAnim.enabled = false;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         levelQuests = GetComponentInParent<SpeakNpc>().quests;
         _quest = QuestController.Instance.GetCurrentQuest();
+        initialItemSize = transform.localScale;
         ActivateIcon(_quest);
     }
+
+    private void ChangeIconSize(UIController.UIElementsSize newSize)
+    {
+        switch (newSize)
+        {
+            case UIController.UIElementsSize.S:
+                gameObject.transform.localScale = initialItemSize;
+                gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                break;
+            case UIController.UIElementsSize.M:
+                gameObject.transform.localScale = new Vector3(initialItemSize.x*2, initialItemSize.y*2, 2);
+                break;
+        }
+    }
+
     private QuestSO CheckCurrentQuest( QuestSO checkQuest)
     {
         foreach (var element in levelQuests)
@@ -80,6 +98,7 @@ public class IconController : MonoBehaviour
             EventController.ActivateIconQuest -= ActivateIcon;
             EventController.DeactivateIconQuest -= DeactivateIcon;
             EventController.CompleteQuest -= EndIconAnim;
+            EventController.OnChangeAccessibility-=ChangeIconSize;
             Destroy(gameObject);
         }
     }

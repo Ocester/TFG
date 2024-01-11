@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790790bf163754697b7bba47a8fd4853, type: 3}
+  m_Name: 2_XianBingSO
+  m_EditorClassIdentifier: 
+  recipeName: Xian Bing
+  recipeId: 2
+  elements:
+  - requiredItem: {fileID: 11400000, guid: b8745c41dff73427980486a3d6bfadaf, type: 2}
+    quantity: 3
+    collectedQuantity: 0
+  - requiredItem: {fileID: 11400000, guid: 4269ea3d3b93749b8b8e6a1c39c013e7, type: 2}
+    quantity: 5
+    collectedQuantity: 0

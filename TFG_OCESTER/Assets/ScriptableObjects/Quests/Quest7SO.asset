@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
   m_Name: Quest7SO
   m_EditorClassIdentifier: 
-  questName: Ending
+  questName: Salad
   questId: 7
-  startingNPC: {fileID: 11400000, guid: 61ee0538331bd4293b7d38156af844a7, type: 2}
-  questText: Quest despedida final.
+  startingNPC: {fileID: 11400000, guid: 14094cab390c645d984cc2fe15211b6b, type: 2}
+  questText: Salad
   npcText:
-  - '!!Muchas gracias por ayudarmos!!'
-  - "Los aldeanos podr\xE1n participar en el festival."
-  - Y todo gracias a tu ayuda!!
-  finishedQuestText: []
-  allIngredientsQuestText: []
-  recipe: {fileID: 0}
+  - "Ey Trufo! necesito de tus conocimientos en ingl\xE9s."
+  - "Quiero hacer una ensalada. Podr\xEDas mirar en el recetario si hay alguna receta?"
+  finishedQuestText:
+  - "\xA1Muchas gracias\xA1 voy a preparar la ensalada enseguida."
+  allIngredientsQuestText:
+  - Perfecto! Ya tienes todos los ingredientes.
+  recipe: {fileID: 11400000, guid: 57e4481b56d37411f9d6f269547a0f3d, type: 2}
   started: 0
   finished: 0
   itemsColected: 0

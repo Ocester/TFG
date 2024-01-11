@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
   m_Name: Quest6SO
   m_EditorClassIdentifier: 
-  questName: Salad
+  questName: Tabbouleh
   questId: 6
-  startingNPC: {fileID: 11400000, guid: 9597196e7025c4108a2192e05ce23d53, type: 2}
-  questText: Ensalada
+  startingNPC: {fileID: 11400000, guid: 7e47997735ac34565a75b4f0ce306bc7, type: 2}
+  questText: Tabbouleh
   npcText:
   - Trufo! necesito tu ayuda.
-  - Quiero hace una ensalada para el festival.
-  - "Podr\xEDas mirar alguna receta del recetario?"
-  - La necesito para poder llevarla al festival.
+  - Quiero hace un Tabbouleh para el festival.
+  - "Podr\xEDas mirar si aparece la receta en el recetario?"
+  - Lo necesito para poder llevarlo al festival.
   finishedQuestText:
   - "\xA1Muchas gracias\xA1 Ahora s\xED que puedo ir al festival."
   allIngredientsQuestText:
-  - Ya los tienes todos!
-  recipe: {fileID: 11400000, guid: 57e4481b56d37411f9d6f269547a0f3d, type: 2}
-  started: 0
-  finished: 0
-  itemsColected: 0
+  - "\xA1Ya los tienes todos\xA1"
+  recipe: {fileID: 11400000, guid: 1726be14100d947a4b2ddb3e07f7d032, type: 2}
+  started: 1
+  finished: 1
+  itemsColected: 1

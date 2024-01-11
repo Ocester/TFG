@@ -25,11 +25,10 @@ public class LoaderController : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        Debug.Log("Play next level");
         // verifico que no hemos sobrepasado el número de escenas.
         if (SceneManager.GetActiveScene().buildIndex + 1 > SceneManager.sceneCountInBuildSettings-1)
         {
-            Debug.Log("no hay más niveles");
+            //no hay más niveles
             return;
         }
         

@@ -6,7 +6,7 @@ public class MovementController : MonoBehaviour
     public Vector2 movementSpeed = new Vector2(5f,5f);
     private Rigidbody2D _playerRb; 
     private Animator _playerAnim;
-    public bool isMoving = true;
+    public bool isMoving;
     private Vector2 _dist;
     private Vector2 _playerPosition;
     private Vector2 _inputVector = new Vector2(0.0f, 0.0f);
@@ -27,6 +27,7 @@ public class MovementController : MonoBehaviour
     {
         _playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
         _playerAnim = GameObject.FindWithTag("Player").GetComponent<Animator>();
+        isMoving = false;
     }
 
     void Update()

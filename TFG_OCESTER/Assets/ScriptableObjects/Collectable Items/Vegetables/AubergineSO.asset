@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dece2d4afeac54b44a2e4c2bd9459211, type: 3}
+  m_Name: AubergineSO
+  m_EditorClassIdentifier: 
+  nameItem: Aubergine
+  imgItem: {fileID: 180697426, guid: 15423eed782534b9097e860697376e50, type: 3}
+  respawnTime: 10
+  collectTool: {fileID: 11400000, guid: 530e59ebdbd72444fa7738c162da05f9, type: 2}
+  itemType: 2

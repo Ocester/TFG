@@ -27,13 +27,13 @@ public class MissionDetails : MonoBehaviour
     private void WriteMissionText(QuestSO quest)
     {
         _textUI.text = "";
-        _textUI.text = quest.questName + "\n";
+        _textUI.text = quest.questName + "\n\n";
         foreach (var element in quest.recipe.elements)
         {
             _textUI.text += element.requiredItem.nameItem+ ": \n";
             _textUI.text += element.collectedQuantity;
             _textUI.text += " / ";
-            _textUI.text += element.quantity + "\n";
+            _textUI.text += element.quantity + "\n\n";
             
         }
         _textUI.enabled = true;

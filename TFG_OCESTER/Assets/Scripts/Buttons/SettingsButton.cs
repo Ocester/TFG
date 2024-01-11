@@ -11,5 +11,6 @@ public class SettingsButton : MonoBehaviour
     private void ShowSettings()
     {
         settingsMenu.SetActive(true);
+        MovementController.Instance.ToggleMovement();
     }
 }

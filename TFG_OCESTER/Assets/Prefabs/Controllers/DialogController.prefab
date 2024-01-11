@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogObjet: {fileID: 0}
   charSpeakImg: {fileID: 0}
+  charSpeakNameText: {fileID: 0}
   arrowSprite: {fileID: 0}
   _textUI: {fileID: 0}
+  player: {fileID: 11400000, guid: bcbb51acde0184e7190645bfa3949167, type: 2}
   _dialogFinished: 0

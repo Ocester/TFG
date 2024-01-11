@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Wilberforce;
 
 public class UIController : MonoBehaviour
 {
     private GameObject[] _toolBtns;
-    private GameObject _uiToolsBar;
+    [SerializeField]private GameObject _uiToolsBar;
+    [SerializeField]private GameObject _uiToolsBarM;
+    [SerializeField]private GameObject _MainCamera;
     private Sprite _currentToolSprite;
+    public UIElementsSize currentUIElementsSize;
     public static UIController Instance;
     private void Awake()
     {
@@ -23,18 +27,19 @@ public class UIController : MonoBehaviour
     {
         // Se suscribe al evento OnSelectedTool
         EventController.OnSelectedTool += ToggleSelection;
+        EventController.OnChangeAccessibility += ChangeUISize;
     }
-
     private void OnDisable()
     {
         EventController.OnSelectedTool -= ToggleSelection;
+        EventController.OnChangeAccessibility -= ChangeUISize;
     }
 
     void Start()
     {
         // Se buscan todos los botones de la tool bar
         _toolBtns = GameObject.FindGameObjectsWithTag("toolBtn");
-        _uiToolsBar = GameObject.FindGameObjectWithTag("UI_ToolsBar");
+        currentUIElementsSize = UIElementsSize.S;
     }
     private void ToggleSelection(ToolsSO selectedTool)
     {
@@ -51,13 +56,90 @@ public class UIController : MonoBehaviour
             }
         }
     }
+    private void ResetToolSelection()
+    {
+        foreach (var tool in _toolBtns)
+        {
+            tool.GetComponent<Image>().color = Color.white;
+        }
+    }
+    
     public void DeactivateTools()
     {
-        _uiToolsBar.SetActive(false);
+        switch (currentUIElementsSize)
+        {
+            case UIElementsSize.S:
+                _uiToolsBar.SetActive(false);
+                return;
+            case UIElementsSize.M:
+                _uiToolsBarM.SetActive(false);
+                return;
+        }
     }
     public void ActivateTools()
     {
-        _uiToolsBar.SetActive(true);
+        switch (currentUIElementsSize)
+        {
+            case UIElementsSize.S:
+                _uiToolsBar.SetActive(true);
+                return;
+            case UIElementsSize.M:
+                _uiToolsBarM.SetActive(true);
+                return;
+        }
+    }
+
+    private void ChangeUISize(UIElementsSize newUIElementsSize)
+    {
+        currentUIElementsSize = newUIElementsSize;
+        switch (currentUIElementsSize)
+        {
+            case UIElementsSize.S:
+                _uiToolsBar.SetActive(true);
+                _uiToolsBarM.SetActive(false);
+                break;
+            case UIElementsSize.M:
+                _uiToolsBarM.SetActive(true);
+                _uiToolsBar.SetActive(false);
+                break;
+        }
+        _toolBtns = null;
+        _toolBtns = GameObject.FindGameObjectsWithTag("toolBtn");
+        ResetToolSelection();
+    }
+
+    public void ChangeColorblindMode(UIColorblindMode colorblindMode)
+    {
+        EventController.SelectedColorblindMode(colorblindMode);
+        switch (colorblindMode)
+        {
+            case UIColorblindMode.Base:
+                _MainCamera.GetComponent<Colorblind>().Type = 0;
+                break;
+            case UIColorblindMode.Protanopia:
+                _MainCamera.GetComponent<Colorblind>().Type = 1;
+                break;
+            case UIColorblindMode.Deutanopia:
+                _MainCamera.GetComponent<Colorblind>().Type = 2;
+                break;
+            case UIColorblindMode.Tritanopia:
+                _MainCamera.GetComponent<Colorblind>().Type = 3;
+                break;
+        }
+    }
+    
+    public enum UIColorblindMode
+    {
+        Base,
+        Protanopia,
+        Tritanopia,
+        Deutanopia
+    }
+    
+    public enum UIElementsSize
+    {
+        S,
+        M,
     }
 
 }

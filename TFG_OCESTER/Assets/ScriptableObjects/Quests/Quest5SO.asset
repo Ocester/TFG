@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013c5e910330b443eb18f158d2837f4f, type: 3}
   m_Name: Quest5SO
   m_EditorClassIdentifier: 
-  questName: Strawberry Jam
+  questName: Kheer
   questId: 5
-  startingNPC: {fileID: 11400000, guid: 14094cab390c645d984cc2fe15211b6b, type: 2}
-  questText: Mermelada de fresa.
+  startingNPC: {fileID: 11400000, guid: 9597196e7025c4108a2192e05ce23d53, type: 2}
+  questText: Kheer
   npcText:
-  - "Hola Trufo, \xBFsabes que voy a hacer una mermelada de fresa para el pastel?"
-  - Pero tengo un problema, me faltan todos los ingredientes.
-  - "\xBFPodr\xEDas buscarlos en tu recetario y recolectarlos por mi?"
+  - "Hola Trufo. Sabes que estoy intentando cocinar Kheer hind\xFA?"
+  - Pero tengo un problema, me faltan algunos ingredientes.
+  - "Podr\xEDas buscarlos en tu recetario y recolectarlos por mi?"
   finishedQuestText:
-  - Muchas gracias Trufo, voy a cocinar la mermelada cuanto antes.
+  - Muchas gracias Trufo, voy a cocinarlo cuanto antes!
   allIngredientsQuestText:
-  - "\xA1Genial! Ya los tienes todos."
-  recipe: {fileID: 11400000, guid: 0536c37e4193b47b99742b96b2245c8c, type: 2}
-  started: 0
-  finished: 0
-  itemsColected: 0
+  - "\xA1Genial\xA1 Ya los tienes todos."
+  recipe: {fileID: 11400000, guid: 39e9c3d754c474e28a74f36daa49da57, type: 2}
+  started: 1
+  finished: 1
+  itemsColected: 1

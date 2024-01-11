@@ -15,9 +15,6 @@ MonoBehaviour:
   recipeName: Fruit cake
   recipeId: 3
   elements:
-  - requiredItem: {fileID: 11400000, guid: 159118d321309411db673d0ea2831a4c, type: 2}
-    quantity: 3
-    collectedQuantity: 0
   - requiredItem: {fileID: 11400000, guid: 82726877e87ab471b9823b2b3cf2b77a, type: 2}
     quantity: 5
     collectedQuantity: 0

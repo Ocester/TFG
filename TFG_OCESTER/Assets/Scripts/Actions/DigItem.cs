@@ -4,17 +4,35 @@ public class DigItem : MonoBehaviour
 {
     [SerializeField] private ItemCollectableSO item;
     [SerializeField]private bool canBeDigged;
+    private Vector3 initialItemSize;
 
     private void Start()
     {
         EventController.ActivateItem += CheckNextQuest;
         EventController.OnFinishLevel += FinishLevel;
+        EventController.OnChangeAccessibility+=ChangeIconSize;
+        initialItemSize = transform.localScale;
+    }
+
+    private void ChangeIconSize(UIController.UIElementsSize newSize)
+    {
+       switch (newSize)
+        {
+            case UIController.UIElementsSize.S:
+                gameObject.transform.localScale = initialItemSize;
+                gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                break;
+            case UIController.UIElementsSize.M:
+                gameObject.transform.localScale = new Vector3(initialItemSize.x * 2, initialItemSize.y * 2, 0);
+                break;
+        }
     }
 
     private void OnDisable()
     {
         EventController.ActivateItem -= CheckNextQuest;
         EventController.OnFinishLevel -= FinishLevel;
+        EventController.OnChangeAccessibility-=ChangeIconSize;
     }
 
     private void FinishLevel()
@@ -40,6 +58,7 @@ public class DigItem : MonoBehaviour
     private void CheckNextQuest(QuestSO checkQuest)
     {
         IsCurrentQuestItem(checkQuest);
+        ChangeIconSize(UIController.Instance.currentUIElementsSize);
     }
     private void OnMouseOver()
     {
